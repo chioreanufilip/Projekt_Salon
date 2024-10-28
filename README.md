@@ -12,3 +12,4 @@ Das Ziel der Anwendung ist es, die Abläufe eines Salons zu digitalisieren und z
 3. Kundenbewertung:
    Nach der Dienstleistung erhält der Kunde eine Anfrage, eine Bewertung abzugeben.
    Die Bewertung wird im System gespeichert und ist für zukünftige Kunden sichtbar.
+4. ![img.png](img.png)
