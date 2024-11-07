@@ -1,0 +1,35 @@
+public class Review {
+    private int id;
+    private int rating;
+    private String comment;
+
+    public Review(int id, int rating, String comment) {
+        this.id = id;
+        this.rating = rating;
+        this.comment = comment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setid(int id) {
+        this.id = id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+}
