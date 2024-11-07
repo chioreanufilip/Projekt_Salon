@@ -1,3 +1,5 @@
+package Module;
+
 import java.time.LocalDateTime;
 
 public class Appointment {
