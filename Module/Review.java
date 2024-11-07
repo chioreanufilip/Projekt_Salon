@@ -1,20 +1,20 @@
 public class Review {
-    private int ID;
+    private int id;
     private int rating;
     private String comment;
 
-    public Review(int ID, int rating, String comment) {
-        this.ID = ID;
+    public Review(int id, int rating, String comment) {
+        this.id = id;
         this.rating = rating;
         this.comment = comment;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getComment() {

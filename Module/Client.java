@@ -1,18 +1,18 @@
 public class Client {
-    private int ID;
+    private Integer id;
     private String name;
     private String phoneNumber;
     private String email;
 
-    public Client(int ID, String name, String phoneNumber, String email) {
-        this.ID = ID;
+    public Client(int id, String name, String phoneNumber, String email) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
     public int getID() {
-        return ID;
+        return id;
     }
 
     public String getName() {
