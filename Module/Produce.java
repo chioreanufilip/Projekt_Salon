@@ -1,7 +1,7 @@
 package Module;
 import java.util.Vector;
 
-public class Produce {
+public class Produce implements HasId{
     private Integer id;
     private String name;
     private Double price;
@@ -15,6 +15,9 @@ public class Produce {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        products.add(this);
+//        products.add(this);
+    }
+    public Integer getId() {
+        return id;
     }
 }

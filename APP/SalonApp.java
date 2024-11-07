@@ -4,19 +4,25 @@ import Module.Barber;
 import Module.NailPainter;
 import Module.Pedicurist;
 import Module.Produce;
+import repository.InMemoryRepository;
 import repository.Repository;
-//import ModuleLayer.Controller;
+import Controller.ControllerSalon;
 
 import java.awt.*;
 import java.util.Scanner;
 public class SalonApp {
-    private final ModuleLayer.Controller Controller;
-
-    public SalonApp(ModuleLayer.Controller controller) {
-        this.Controller = controller;
+//    private final Controller =Controller;
+//    ControllerSalon controller = new ControllerSalon();
+    public SalonApp() {
+//        this.Controller = controller;
     }
 
     public void menu() {
+        Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
+        Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
+        Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
+        Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
+        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
         System.out.println("Welcome to Menu.Menu: \n" +
                 "1-make appointment\n" +
                 "2-admin");
@@ -50,9 +56,10 @@ public class SalonApp {
                         int experience = scan2.nextInt();
                         System.out.println("Enter what he specializes in:\n");
                         String specialize = scan2.next();
-
+                        controllerSalon.enrollBarber(name, hairstyles, experience, specialize);
 //                        Barber ion = new Barber(name, hairstyles, experience, specialize);
 //                        System.out.println(ion.getSizeBarber());
+//                        System.out
                         menu();
                         break;
                     case 2:
@@ -99,8 +106,8 @@ public class SalonApp {
     }
     public static void main(String[] args) {
 //        Repository<Barber> repoBarber =
-//        SalonApp menu = new SalonApp();
-//        menu();
+        SalonApp menu = new SalonApp();
+        menu.menu();
     }
 //
 //
