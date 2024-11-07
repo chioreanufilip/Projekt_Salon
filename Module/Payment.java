@@ -1,11 +1,11 @@
 public class Payment {
 
-    private int ID;
+    private Integer id;
     private String method;
     private double amount;
 
-    public Payment(int ID, String method, double amount) {
-        this.ID = ID;
+    public Payment(int id, String method, double amount) {
+        this.id = id;
         this.method = method;
         this.amount = amount;
     }
@@ -18,8 +18,8 @@ public class Payment {
         return method;
     }
 
-    public int getID() {
-        return ID;
+    public int getid() {
+        return id;
     }
 
 
