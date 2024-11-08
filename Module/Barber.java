@@ -26,6 +26,7 @@ public class Barber extends Employee {
 //        }
 //        barbers.add(this);
     }
+
 //    public int getSizeBarber(){
 //        return barbers.size();
 //    }

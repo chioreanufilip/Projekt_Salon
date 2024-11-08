@@ -1,3 +1,5 @@
+package Module;
+
 public class Client {
     private Integer id;
     private String name;
@@ -25,5 +27,21 @@ public class Client {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
