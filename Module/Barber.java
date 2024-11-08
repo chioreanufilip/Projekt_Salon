@@ -6,8 +6,17 @@ import java.util.Vector;
 public class Barber extends Employee {
 //    private static Vector<Barber> barbers = new Vector<>();
     private String hairStyle;
-    public Barber(String name, String hairStyle, int experience, String speciality) {
-        super(name,experience,speciality);
+
+    public String getHairStyle() {
+        return hairStyle;
+    }
+
+    public void setHairStyle(String hairStyle) {
+        this.hairStyle = hairStyle;
+    }
+
+    public Barber(String name, String hairStyle, int experience, String speciality, Integer id) {
+        super(name,experience,speciality,id);
         this.hairStyle = hairStyle;
 //        if (barbers.size() == 0) {
 //            this.id=1;
