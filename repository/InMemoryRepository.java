@@ -10,16 +10,21 @@ public class InMemoryRepository<T extends HasId> implements Repository<T> {
     @Override
 public void create(T object) {
     data.putIfAbsent(object.getId(), object);
+//    System.out.println(data.get(object.getId()));
     }
+    @Override
 public void update(T object) {
     data.replace(object.getId(), object);
 }
+@Override
 public void delete(Integer id) {
     data.remove(id);
 }
+@Override
 public List<T> getAll() {
     return data.values().stream().toList();
 }
+@Override
 public T getById(int id) {
     return data.get(id);
 }

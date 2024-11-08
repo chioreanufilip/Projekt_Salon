@@ -16,13 +16,17 @@ public class SalonApp {
     public SalonApp() {
 //        this.Controller = controller;
     }
-
+    Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
+    Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
+    Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
+    Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
+    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
     public void menu() {
-        Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
-        Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
-        Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
-        Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
-        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
+//        Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
+//        Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
+//        Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
+//        Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
+//        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
         System.out.println("Welcome to Menu.Menu: \n" +
                 "1-make appointment\n" +
                 "2-admin");
@@ -56,7 +60,13 @@ public class SalonApp {
                         int experience = scan2.nextInt();
                         System.out.println("Enter what he specializes in:\n");
                         String specialize = scan2.next();
-                        controllerSalon.enrollBarber(name, hairstyles, experience, specialize);
+                        System.out.println("Enter id: ");
+                        Integer id = scan2.nextInt();
+                        controllerSalon.enrollBarber(name, hairstyles, experience, specialize,id);
+//                        repoBarb.getAll().forEach(System.out::println);
+//                        for (int i =0;i<repoBarb.getAll().size();i++){
+//                            System.out.println(repoBarb.getAll().get(i).getName());
+//                        }
 //                        Barber ion = new Barber(name, hairstyles, experience, specialize);
 //                        System.out.println(ion.getSizeBarber());
 //                        System.out
@@ -71,7 +81,10 @@ public class SalonApp {
                         int experience1 = scan2.nextInt();
                         System.out.println("what kind of experience do you have with gel:\n");
                         String gelExperience = scan2.next();
-                        NailPainter ionica = new NailPainter(name1, experience1, speciality, gelExperience);
+                        System.out.println("Enter id: ");
+                        Integer id2 = scan2.nextInt();
+                        controllerSalon.enrollNailPainter(name1,experience1,speciality,gelExperience,id2);
+//                        NailPainter ionica = new NailPainter(name1, experience1, speciality, gelExperience);
 //                        System.out.println(ionica.getSize());
                         menu();
                         break;
@@ -84,8 +97,11 @@ public class SalonApp {
                         int experience3 = scan2.nextInt();
                         System.out.println("write what kind of Foot Care Speciality you have:\n");
                         String footCare = scan2.next();
-                        Pedicurist ionicosul = new Pedicurist(name2, experience3, speciality3, footCare);
+                        System.out.println("Enter id: ");
+                        Integer id1 = scan2.nextInt();
+//                        Pedicurist ionicosul = new Pedicurist(name2, experience3, speciality3, footCare);
 //                        System.out.println(ionicosul.getSize());
+                        controllerSalon.enrollPedicurist(name2,experience3,speciality3,footCare,id1);
                         menu();
                         break;
                     case 4:
@@ -95,11 +111,47 @@ public class SalonApp {
                         double price = scan.nextDouble();
                         System.out.println("How many do you have: \n");
                         int stock = scan.nextInt();
-                        Produce produce = new Produce(productName, price, stock);
+                        System.out.println("Enter id: ");
+                        int id3 = scan.nextInt();
+//                        Produce produce = new Produce(productName, price, stock,id3);
+                        controllerSalon.addProduct(productName,price,stock,id3);
                         menu();
                 }
             break;
             case 2:
+                System.out.println("What do you want to delete: \n" +
+                        "1- Barber\n" +
+                        "2- NailPainter\n" +
+                        "3- Pedicurist\n" +
+                        "4- Product");
+                int choise =scan.nextInt();
+                switch (choise) {
+                    case 1:
+                        System.out.println("Enter id");
+                        int id = scan.nextInt();
+                        controllerSalon.deleteBarber(id);
+                        menu();
+                        break;
+                    case 2:
+                        System.out.println("Enter id");
+                        int id2 = scan.nextInt();
+                        controllerSalon.deleteNailPainter(id2);
+                        menu();
+                        break;
+                    case 3:
+                        System.out.println("Enter id");
+                        int id3 = scan.nextInt();
+                        controllerSalon.deletePedicurist(id3);
+                        menu();
+                        break;
+                    case 4:
+                        System.out.println("Enter id");
+                        int id4 = scan.nextInt();
+                        controllerSalon.deleteProduct(id4);
+                        menu();
+                        break;
+                }
+
             break;
         }
     }
