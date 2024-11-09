@@ -2,20 +2,23 @@ package Module;
 
 import java.time.Duration;
 
-public class Service {
+public class Service implements HasId{
     private int ID;
     private String name;
     private Duration duration;
     private double price;
+    private Integer type;///1 will be for barber, 2 for Nailpainter,3 for pedicurist,4 for NailPainter and Pedi
 
-    public Service(int ID, String name, Duration duration, double price) {
+
+    public Service(int ID, String name, Duration duration, double price,Integer type) {
         this.ID = ID;
         this.name = name;
         this.duration = duration;
         this.price = price;
+        this.type=type;
     }
 
-    public int getID() {
+    public Integer getId() {
         return ID;
     }
 
@@ -45,5 +48,13 @@ public class Service {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
