@@ -6,12 +6,14 @@ public class Produce implements HasId{
     private String name;
     private Double price;
     private Integer stock;
+    private Integer type;///1 will be for barber, 2 for Nailpainter,3 for pedicurist,4 for NailPainter and Pedi
 //    private static Vector<Produce> products = new Vector<Produce>();
-    public Produce(String name, Double price, Integer stock,Integer id) {
+    public Produce(String name, Double price, Integer stock,Integer type,Integer id) {
 //        if (products.isEmpty()) this.id=1;
 //        else {
 //            this.id = products.lastElement().id + 1;
 //        }
+        this.type=type;
         this.name = name;
         this.price = price;
         this.stock = stock;
@@ -44,5 +46,13 @@ public class Produce implements HasId{
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
