@@ -14,6 +14,7 @@ import Module.Client;
 import Module.Payment;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class SalonApp {
     Repository<Payment> repoPayment = new InMemoryRepository<Payment>();
     Repository<Review> repoReview = new InMemoryRepository<Review>();
     Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
-    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview);
+    Repository<Client> repoClient = new InMemoryRepository<Client>();
+    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
     public void initialize(){
         repoBarb.create(new Barber("Bob","Wolfcut, Fades, Fringe",1,"Wolfcut",Integer.valueOf(1)));
         repoNail.create(new NailPainter("Costel",2,"NailPainting","yes",Integer.valueOf(1)));
@@ -64,6 +66,7 @@ public class SalonApp {
         int selection = scan.nextInt();
         switch (selection) {
             case 1:
+                List<Service> chosenService=new ArrayList<>();
                 System.out.println("Please select a service you want to make appointment: \n" );
                 List<Service> allServices = controllerSalon.getAllServices();
                 for (int i =1;i<allServices.size()+1;i++){
@@ -71,6 +74,7 @@ public class SalonApp {
                 }
                 Scanner scan9 = new Scanner(System.in);
                 int services = scan9.nextInt();/// aici decizia de service ar trebui bagata in apointment
+                chosenService.add(allServices.get(services-1));
                 List<Produce> allProduce = controllerSalon.getAllProduce();
                 System.out.println("Please select the product that you want the employee to use on you: ");
                 for (int i=0;i<allProduce.size();i++){
@@ -97,11 +101,88 @@ public class SalonApp {
                         products.add(allProduce.get(choice1-1));
                     }
                 }
+                Boolean time = Boolean.TRUE;
+                String time1 = null;
+                while(time ==Boolean.TRUE){
+                System.out.println("Please enter the time for the appointment like this zz/ll h/m: ");
+                time1=scan.next();
+                if (controllerSalon.getAllAppointments().size()==0){
+                    time=Boolean.FALSE;
+                }
+                for (int i=0;i<controllerSalon.getAllAppointments().size();i++){
+                    if (controllerSalon.getAllAppointments().get(i).getDateTime()==time1){
+                        time=Boolean.FALSE;
+                    }
+                    else {
+                        System.out.println("Sorry that time is taken\n");
+                    }
+                }
+                }
+                System.out.println("Is it your first appointment?: \n" +
+                        "1- yes\n" +
+                        "2-no\n");
+                int choise1=scan.nextInt();
+                Integer clientId=0;
+                switch (choise1){
+                    case 1:
+                        System.out.println("Enter your name: \n");
+                        String name = scan.next();
+                        System.out.println("Enter your phonenumber: \n");
+                        String phone = scan.next();
+                        if (controllerSalon.getAllClients().isEmpty()){
+                            controllerSalon.enrollClient(1,name,phone);
+                        }
+                        else {
+                            controllerSalon.enrollClient(controllerSalon.getAllClients().getLast().getId() + 1, name, phone);
+                        }
+                        controllerSalon.getAllClients().size();
+                        clientId=controllerSalon.getAllClients().size()-1;
+                        break;
+                    case 2:
+                        System.out.println("Enter your name: \n");
+                        name = scan.next();
+                        System.out.println("Enter your phonenumber: \n");
+                        phone = scan.next();
+                        for (int i =0;i<controllerSalon.getAllClients().size();i++){
+                            if (controllerSalon.getAllClients().get(i).getPhoneNumber()==phone && controllerSalon.getAllClients().get(i).getName()==name){
+                                clientId=i;
+                            }
+                            if (i==controllerSalon.getAllClients().size()-1){
+                                if (clientId!=i){
+                                    if (controllerSalon.getAllClients().isEmpty()){
+                                        controllerSalon.enrollClient(1,name,phone);
+                                    }
+                                    else {
+                                        controllerSalon.enrollClient(controllerSalon.getAllClients().getLast().getId() + 1, name, phone);
+                                    }
+                                    controllerSalon.getAllClients().size();
+                                    clientId=controllerSalon.getAllClients().size()-1;
+                                }
+                            }
+                        }
+                        break;
+                }
+                if (controllerSalon.getAllAppointments().isEmpty()){
+                controllerSalon.enrollAppointment(1,time1,controllerSalon.getAllClients().get(clientId),chosenService);
 
+            }
+                else {
+                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                }
+                if (controllerSalon.getAllPayment().isEmpty()){
+                    controllerSalon.enrollPayment(1,chosenService,products);
+                }
+                else{
+                    controllerSalon.enrollPayment(controllerSalon.getAllPayments().getLast().getId()+1,chosenService,products);
 
+                }
+                System.out.println("You have to pay :\n" +
+                        controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount()+
+                        "Lei Moldovenesti");
 
                 ///si de aici pui in apointment si calculezi pretu unde il faci +pretul produselor din products.
 //                allServices.forEach(System.out.println(.););
+                menu();
                 break;
             case 2:
                 System.out.println("1- create\n" +
