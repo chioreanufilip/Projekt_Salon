@@ -8,12 +8,18 @@ import repository.InMemoryRepository;
 import repository.Repository;
 import Controller.ControllerSalon;
 import Module.Service;
+import Module.Review;
+import Module.Appointment;
+import Module.Client;
+import Module.Payment;
 
 import java.awt.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadPoolExecutor;
+
 public class SalonApp {
 //    private final Controller =Controller;
 //    ControllerSalon controller = new ControllerSalon();
@@ -25,19 +31,22 @@ public class SalonApp {
     Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
     Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
     Repository<Service> repoService = new InMemoryRepository<Service>();
-    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService);
+    Repository<Payment> repoPayment = new InMemoryRepository<Payment>();
+    Repository<Review> repoReview = new InMemoryRepository<Review>();
+    Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
+    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview);
     public void initialize(){
-        repoBarb.create(new Barber("Bob","Wolfcut, Fades, Fringe",1,"Wolfcut",1));
-        repoNail.create(new NailPainter("Costel",2,"NailPainting","yes",1));
-        repoPedi.create(new Pedicurist("Marcel",1,"Massage, nailpainting","University of Feet",1));
-        repoProduct.create(new Produce("Hairdye Blue",15.23,5,1,1));
-        repoProduct.create(new Produce("Hairdye Red",15.23,5,1,2));
-        repoProduct.create(new Produce("Nail Polish",45.83,15,4,3));
-        repoProduct.create(new Produce("Nail gel",5.83,4,4,4));
-        repoProduct.create(new Produce("Foot Scrub",25.83,9,3,5));
-        repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,1));
-        repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,4));
-        repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,3));
+        repoBarb.create(new Barber("Bob","Wolfcut, Fades, Fringe",1,"Wolfcut",Integer.valueOf(1)));
+        repoNail.create(new NailPainter("Costel",2,"NailPainting","yes",Integer.valueOf(1)));
+        repoPedi.create(new Pedicurist("Marcel",Integer.valueOf(1),"Massage, nailpainting","University of Feet",Integer.valueOf(1)));
+        repoProduct.create(new Produce("Hairdye Blue",Double.valueOf(15.23),Integer.valueOf(4),Integer.valueOf(1),Integer.valueOf(1)));
+        repoProduct.create(new Produce("Hairdye Red",Double.valueOf(15.23),Integer.valueOf(4),Integer.valueOf(1),Integer.valueOf(2)));
+        repoProduct.create(new Produce("Nail Polish",Double.valueOf(45.83),Integer.valueOf(15),Integer.valueOf(4),Integer.valueOf(3)));
+        repoProduct.create(new Produce("Nail gel",Double.valueOf(5.83),Integer.valueOf(4),Integer.valueOf(4),Integer.valueOf(4)));
+        repoProduct.create(new Produce("Foot Scrub",Double.valueOf(25.83),Integer.valueOf(9),Integer.valueOf(3),Integer.valueOf(5)));
+        repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,Integer.valueOf(1)));
+        repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,Integer.valueOf(4)));
+        repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,Integer.valueOf(3)));
 
     }
     public void menu() {
@@ -120,7 +129,7 @@ public class SalonApp {
                         System.out.println("Enter what he specializes in:\n");
                         String specialize = scan2.next();
                         System.out.println("Enter id: ");
-                        Integer id = scan2.nextInt();
+                        Integer id = (Integer) scan2.nextInt();
                         controllerSalon.enrollBarber(name, hairstyles, experience, specialize,id);
 //                        repoBarb.getAll().forEach(System.out::println);
 //                        for (int i =0;i<repoBarb.getAll().size();i++){
@@ -141,7 +150,7 @@ public class SalonApp {
                         System.out.println("what kind of experience do you have with gel:\n");
                         String gelExperience = scan2.next();
                         System.out.println("Enter id: ");
-                        Integer id2 = scan2.nextInt();
+                        Integer id2 = (Integer) scan2.nextInt();
                         controllerSalon.enrollNailPainter(name1,experience1,speciality,gelExperience,id2);
 //                        NailPainter ionica = new NailPainter(name1, experience1, speciality, gelExperience);
 //                        System.out.println(ionica.getSize());
@@ -153,11 +162,11 @@ public class SalonApp {
                         System.out.println("Enter the speciality:\n");
                         String speciality3 = scan2.next();
                         System.out.println("Enter how many years of experience:\n");
-                        int experience3 = scan2.nextInt();
+                        Integer experience3 = (Integer) scan2.nextInt();
                         System.out.println("write what kind of Foot Care Speciality you have:\n");
                         String footCare = scan2.next();
                         System.out.println("Enter id: ");
-                        Integer id1 = scan2.nextInt();
+                        Integer id1 = (Integer) scan2.nextInt();
 //                        Pedicurist ionicosul = new Pedicurist(name2, experience3, speciality3, footCare);
 //                        System.out.println(ionicosul.getSize());
                         controllerSalon.enrollPedicurist(name2,experience3,speciality3,footCare,id1);
@@ -167,17 +176,17 @@ public class SalonApp {
                         System.out.println("Enter the name of the product: ");
                         String productName = scan.next();
                         System.out.println("Write the price you are selling it for:\n");
-                        double price = scan.nextDouble();
+                        Double price = (Double) scan.nextDouble();
                         System.out.println("How many do you have: \n");
-                        int stock = scan.nextInt();
+                        Integer stock = (Integer) scan.nextInt();
                         System.out.println("Enter id: ");
-                        int id3 = scan.nextInt();
+                        Integer id3 = (Integer) scan.nextInt();
                         System.out.println("Will this be used by: \n" +
                                 "1-Barber\n" +
                                 "2-NailPainter\n" +
                                 "3-Pedicurist\n" +
                                 "4-Both NailPainter and Pedicurist");
-                        int type = scan.nextInt();
+                        Integer type = (Integer) scan.nextInt();
 //                        Produce produce = new Produce(productName, price, stock,id3);
                         controllerSalon.addProduct(productName,price,stock,type,id3);
                         menu();
@@ -194,25 +203,25 @@ public class SalonApp {
                     case 1:
                         System.out.println("Enter id");
                         int id = scan.nextInt();
-                        controllerSalon.deleteBarber(id);
+                        controllerSalon.deleteBarber(Integer.valueOf(id));
                         menu();
                         break;
                     case 2:
                         System.out.println("Enter id");
                         int id2 = scan.nextInt();
-                        controllerSalon.deleteNailPainter(id2);
+                        controllerSalon.deleteNailPainter(Integer.valueOf(id2));
                         menu();
                         break;
                     case 3:
                         System.out.println("Enter id");
                         int id3 = scan.nextInt();
-                        controllerSalon.deletePedicurist(id3);
+                        controllerSalon.deletePedicurist(Integer.valueOf(id3));
                         menu();
                         break;
                     case 4:
                         System.out.println("Enter id");
                         int id4 = scan.nextInt();
-                        controllerSalon.deleteProduct(id4);
+                        controllerSalon.deleteProduct(Integer.valueOf(id4));
                         menu();
                         break;
                 }

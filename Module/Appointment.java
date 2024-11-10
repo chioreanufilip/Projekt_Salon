@@ -2,9 +2,10 @@ package Module;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import Module.HasId;
 
-public class Appointment implements Module.HasId {
-    private int ID;
+public class Appointment implements HasId {
+    private Integer ID;
     private LocalDateTime dateTime;
     private String status;
     private Client client;
@@ -14,7 +15,7 @@ public class Appointment implements Module.HasId {
     private Payment payment;
 
 
-    public Appointment(int ID, LocalDateTime dateTime, Client client, Service service, Employee employee) {
+    public Appointment(Integer ID, LocalDateTime dateTime, Client client, Service service, Employee employee) {
         this.ID = ID;
         this.dateTime = dateTime;
         this.status = status;
@@ -29,7 +30,7 @@ public class Appointment implements Module.HasId {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(Integer ID) {
         this.ID = ID;
     }
 
@@ -76,4 +77,7 @@ public class Appointment implements Module.HasId {
     public Payment getPayment() {return payment;}
 
     public void setPayment(Payment payment) {this.payment = payment;}
+    public Integer getId(){
+        return ID;
+    }
 }

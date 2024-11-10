@@ -4,6 +4,7 @@ import repository.*;
 import Module.*;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ControllerSalon {
@@ -77,8 +78,8 @@ public class ControllerSalon {
     }
 
     //Review
-    public void enrollReview(int id, String customerName, String comment, int rating) {
-        reviewRepository.create(new Review(id, customerName, comment, rating));////////////////////////////////////////////////////////////////////////////
+    public void enrollReview(Integer id, String comment, int rating) {
+        reviewRepository.create(new Review(id, rating, comment));////////////////////////////////////////////////////////////////////////////
     }
 
     public void deleteReview(Integer id) {
@@ -94,8 +95,8 @@ public class ControllerSalon {
     }
 
     // Appointment
-    public void enrollAppointment(int id, Service service, Employee employee, List<Produce> products, String customerName, Payment payment) {
-        Appointment appointment = new Appointment(id, service, employee, products, customerName, payment);///////////////////////////////////////////////////////////////////////
+    public void enrollAppointment(int id, LocalDateTime time,Client client,Service service, Employee employee) {
+        Appointment appointment = new Appointment(id, time,client,service, employee);///////////////////////////////////////////////////////////////////////
         appointmentRepository.create(appointment);
     }
 
@@ -112,7 +113,7 @@ public class ControllerSalon {
     }
 
     // Payment
-    public void enrollPayment(int id, double amount, String method) {
+    public void enrollPayment(Integer id, Double amount, String method) {
         Payment payment = new Payment(id, method, amount);
         paymentRepository.create(payment);
     }
