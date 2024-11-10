@@ -1,3 +1,7 @@
+package Module;
+
+import java.util.List;
+
 public class Payment {
 
     private Integer id;
@@ -22,5 +26,12 @@ public class Payment {
         return id;
     }
 
+    public static Payment createPaymentForAppointment(Service service, List<Produce> products, String paymentMethod, int paymentId) {
+        double totalAmount = service.getPrice();  // Start with the service price
+        for (Produce product : products) {
+            totalAmount += product.getPrice();  // Add product prices
+        }
+        return new Payment(paymentId, paymentMethod, totalAmount);
+    }
 
 }

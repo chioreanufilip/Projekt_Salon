@@ -23,7 +23,21 @@ public class ControllerSalon {
         this.serviceRepository = serviceRepository;
     }
 
-//    InMemoryRepository barberrepo = new InMemoryRepository();
+    public void createAppointment(Integer serviceId, Employee employee, List<Produce> products, String customerName, String paymentMethod, int paymentId) {
+        Service service = serviceRepository.getById(serviceId);
+
+        // Create payment for this appointment
+        Payment payment = Payment.createPaymentForAppointment(service, products, paymentMethod, paymentId);
+
+        // Create the appointment with the associated payment
+        Appointment appointment = new Appointment(generateId(), service, employee, products, customerName, payment);
+
+        appointmentRepository.addAppointment(appointment);
+        paymentRepository.create(payment);  // Store the payment information
+    }
+
+
+    //    InMemoryRepository barberrepo = new InMemoryRepository();
     public void enrollBarber(String name, String hairStyle, int experience, String speciality,Integer id){
         barberRepository.create(new Barber(name,hairStyle,experience,speciality,id));
 
@@ -59,4 +73,7 @@ public class ControllerSalon {
         return serviceRepository.getAll();
     }
 
+    private int generateId() {
+        return (int) (Math.random() * 1000);
+    }
 }

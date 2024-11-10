@@ -1,5 +1,7 @@
+package Module;
+
 public class Review {
-    private int id;
+    private Integer id;
     private int rating;
     private String comment;
 
@@ -9,7 +11,7 @@ public class Review {
         this.comment = comment;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
