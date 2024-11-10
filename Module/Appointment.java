@@ -3,7 +3,7 @@ package Module;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Appointment {
+public class Appointment implements Module.HasId {
     private int ID;
     private LocalDateTime dateTime;
     private String status;

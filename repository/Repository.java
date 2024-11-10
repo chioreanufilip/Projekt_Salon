@@ -7,4 +7,5 @@ public interface Repository <T > {
     void delete(Integer id);
     List<T> getAll();
     T getById(int id);
+
 }
