@@ -5,15 +5,11 @@ import Module.Review;
 import Module.Payment;
 import Module.HasId;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-
+import java.util.*;
 
 
 public class InMemoryRepository<T extends HasId> implements Repository<T> {
-    private final Map<Integer, T> data = new HashMap<>();
+    private final Map<Integer, T> data = new LinkedHashMap<>();
 
 //    private final List<Appointment> appointments = new ArrayList<>();
 //    private final List<Review> reviews = new ArrayList<>();
@@ -34,8 +30,8 @@ public void delete(Integer id) {
 }
 @Override
 public List<T> getAll() {
-    return data.values().stream().toList();
-}
+        return data.values().stream().toList();
+    }
 @Override
 public T getById(int id) {
     return data.get(id);
