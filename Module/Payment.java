@@ -2,13 +2,13 @@ package Module;
 
 import java.util.List;
 
-public class Payment {
+public class Payment implements HasId{
 
     private Integer id;
     private String method;
     private double amount;
 
-    public Payment(int id, String method, double amount) {
+    public Payment(Integer id, String method, Double amount) {
         this.id = id;
         this.method = method;
         this.amount = amount;
@@ -22,7 +22,7 @@ public class Payment {
         return method;
     }
 
-    public int getid() {
+    public Integer getId() {
         return id;
     }
 
@@ -31,7 +31,7 @@ public class Payment {
         for (Produce product : products) {
             totalAmount += product.getPrice();  // Add product prices
         }
-        return new Payment(paymentId, paymentMethod, totalAmount);
+        return new Payment(Integer.valueOf(paymentId), paymentMethod, Double.valueOf(totalAmount));
     }
 
 }

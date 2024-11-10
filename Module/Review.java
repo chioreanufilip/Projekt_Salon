@@ -1,11 +1,11 @@
 package Module;
 
-public class Review {
+public class Review implements HasId {
     private Integer id;
     private int rating;
     private String comment;
 
-    public Review(int id, int rating, String comment) {
+    public Review(Integer id, int rating, String comment) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
@@ -15,7 +15,7 @@ public class Review {
         return id;
     }
 
-    public void setid(int id) {
+    public void setid(Integer id) {
         this.id = id;
     }
 
