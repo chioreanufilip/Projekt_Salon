@@ -1,6 +1,7 @@
 package Module;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Appointment {
     private int ID;
@@ -8,13 +9,20 @@ public class Appointment {
     private String status;
     private Client client;
     private Service service;
+    private Employee employee;
+    private List<Produce> products;
+    private Payment payment;
 
-    public Appointment(int ID, LocalDateTime dateTime, Client client, Service service) {
+
+    public Appointment(int ID, LocalDateTime dateTime, Client client, Service service, Employee employee) {
         this.ID = ID;
         this.dateTime = dateTime;
         this.status = status;
         this.client = client;
         this.service = service;
+        this.employee = employee;
+        this.products = products;
+        this.payment = payment;
     }
 
     public int getID() {
@@ -57,4 +65,15 @@ public class Appointment {
         this.service = service;
     }
 
+    public Employee getEmployee() {return employee;}
+
+    public void setEmployee(Employee employee) {this.employee = employee;}
+
+    public List<Produce> getProducts() {return products;}
+
+    public void setProducts(List<Produce> products) {this.products = products;}
+
+    public Payment getPayment() {return payment;}
+
+    public void setPayment(Payment payment) {this.payment = payment;}
 }

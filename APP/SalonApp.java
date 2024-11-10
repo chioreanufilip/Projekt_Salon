@@ -49,7 +49,8 @@ public class SalonApp {
 //        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
         System.out.println("Welcome to Menu: \n" +
                 "1-make appointment\n" +
-                "2-admin");
+                "2-admin\n" +
+                "3- male review");
         Scanner scan = new Scanner(System.in);
         int selection = scan.nextInt();
         switch (selection) {
