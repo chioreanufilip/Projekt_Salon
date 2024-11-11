@@ -140,4 +140,7 @@ public class ControllerSalon {
     public Payment getPaymentById(int id) {
         return paymentRepository.getById(id);
     }
+    public Client getClientById(int id) {
+        return clientRepository.getById(id);
+    }
 }

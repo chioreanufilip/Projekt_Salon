@@ -50,6 +50,8 @@ public class SalonApp {
         repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,Integer.valueOf(1)));
         repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,Integer.valueOf(4)));
         repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,Integer.valueOf(3)));
+//        repoClient.create(new Client(1, "Alice", "123456789", "alice@example.com"));
+//        repoClient.create(new Client(2, "Bob", "987654321", "bob@example.com"));
 
     }
     public void menu() {
@@ -60,9 +62,10 @@ public class SalonApp {
 //        Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
 //        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
         System.out.println("Welcome to Menu: \n" +
-                "1-make appointment\n" +
-                "2-admin\n" +
-                "3- male review");
+                "1 - make appointment\n" +
+                "2 - admin\n" +
+                "3 - make review\n" +
+                "4 - exit");
         Scanner scan = new Scanner(System.in);
         int selection = scan.nextInt();
         switch (selection) {
@@ -181,13 +184,43 @@ public class SalonApp {
 
                 }
                 System.out.println("You have to pay :\n" +
-                        controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount()+
-                        "Lei Moldovenesti");
+                        controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount());
 
                 ///si de aici pui in apointment si calculezi pretu unde il faci +pretul produselor din products.
 //                allServices.forEach(System.out.println(.););
+                // Create appointment
+                double totalPrice = chosenService.get(0).getPrice();
+                for (Produce product : products) {
+                    totalPrice += product.getPrice(); // Add price of products to total price
+                }
+
+                if (controllerSalon.getAllAppointments().isEmpty()) {
+                    controllerSalon.enrollAppointment(1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                } else {
+                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                }
+
+//                // Create payment
+//                if (controllerSalon.getAllPayment().isEmpty()) {
+//                    controllerSalon.enrollPayment(1, totalPrice, chosenService, products);
+//                } else {
+//                    controllerSalon.enrollPayment(controllerSalon.getAllPayments().getLast().getId() + 1, totalPrice, chosenService, products);
+//                }
+//
+//                System.out.println("You have to pay: " + totalPrice + " Lei");
+
+
                 menu();
                 break;
+
+            case 3:
+                makeReview();
+                break;
+
+            case 4:
+                System.out.println("Exiting the application. Thank you for using SalonApp!");
+                break;
+
             case 2:
                 System.out.println("1- create\n" +
                         "2- delete\n" +
@@ -323,6 +356,58 @@ public class SalonApp {
         }
     }
     }
+
+    private void makeReview() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Review Menu: \n" +
+                "1 - Add a Review\n" +
+                "2 - View All Reviews\n");
+        int reviewOption = scanner.nextInt();
+
+        switch (reviewOption) {
+            case 1:
+                // Adding a new review
+                System.out.print("Enter your Client ID: ");
+                int clientId = scanner.nextInt();
+
+                Client client = controllerSalon.getClientById(clientId);
+                if (client == null) {
+                    System.out.println("Client not found. Please make sure the Client ID is correct.");
+                    return;
+                }
+
+                System.out.print("Enter Review ID: ");
+                int reviewId = scanner.nextInt();
+
+                System.out.print("Enter Rating (1-5): ");
+                int rating = scanner.nextInt();
+
+                scanner.nextLine();  // Consume newline
+                System.out.print("Enter Comment: ");
+                String comment = scanner.nextLine();
+
+                Review review = new Review(reviewId, rating, comment);
+                controllerSalon.enrollReview(reviewId, comment, rating);
+                System.out.println("Thank you, " + client.getName() + ", for your review!");
+                break;
+
+            case 2:
+                List<Review> allReviews = controllerSalon.getAllReviews();
+                if (allReviews.isEmpty()) {
+                    System.out.println("No reviews available.");
+                } else {
+                    System.out.println("All Reviews:");
+                    for (Review reviewItem : allReviews) {
+                        System.out.println("ID: " + reviewItem.getId() + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
+                    }
+                }
+                break;
+
+        }
+        menu();
+    }
+
     public static void main(String[] args) {
 //        Repository<Barber> repoBarber =
         SalonApp menu = new SalonApp();
