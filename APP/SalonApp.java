@@ -49,8 +49,8 @@ public class SalonApp {
         repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,Integer.valueOf(1)));
         repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,Integer.valueOf(4)));
         repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,Integer.valueOf(3)));
-        repoClient.create(new Client(1, "Alice", "123456789", "alice@example.com"));
-        repoClient.create(new Client(2, "Bob", "987654321", "bob@example.com"));
+//        repoClient.create(new Client(1, "Alice", "123456789", "alice@example.com"));
+//        repoClient.create(new Client(2, "Bob", "987654321", "bob@example.com"));
 
     }
     public void menu() {
