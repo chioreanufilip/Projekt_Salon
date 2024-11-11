@@ -1,6 +1,8 @@
 package Module;
 
-public class Client {
+import Module.HasId;
+
+public class Client implements HasId {
     private Integer id;
     private String name;
     private String phoneNumber;
@@ -11,10 +13,6 @@ public class Client {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-    }
-
-    public int getID() {
-        return id;
     }
 
     public String getName() {
@@ -43,5 +41,11 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    @Override
+    public Integer getId() {
+        return id;
     }
 }

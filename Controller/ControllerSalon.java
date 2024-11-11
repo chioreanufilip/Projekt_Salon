@@ -16,11 +16,13 @@ public class ControllerSalon {
     private final Repository<Appointment> appointmentRepository;
     private final Repository<Payment> paymentRepository;
     private final Repository<Review> reviewRepository;
+    private final Repository<Client> clientRepository;
+
 
     public ControllerSalon(Repository<Barber> barberRepository, Repository<NailPainter> nailPainterRepository,
                            Repository<Produce> produceRepository, Repository<Pedicurist> pedicuristRepository,
                            Repository<Service> serviceRepository, Repository<Appointment> appointmentRepository, Repository<Payment> paymentRepository,
-                           Repository<Review> reviewRepository) {
+                           Repository<Review> reviewRepository, Repository<Client> clientRepository) {
         this.barberRepository = barberRepository;
         this.nailPainterRepository = nailPainterRepository;
         this.produceRepository = produceRepository;
@@ -29,6 +31,7 @@ public class ControllerSalon {
         this.appointmentRepository = appointmentRepository;
         this.paymentRepository = paymentRepository;
         this.reviewRepository = reviewRepository;
+        this.clientRepository = clientRepository;
     }
 
     //    InMemoryRepository barberrepo = new InMemoryRepository();
@@ -126,5 +129,8 @@ public class ControllerSalon {
     }
     public Payment getPaymentById(int id) {
         return paymentRepository.getById(id);
+    }
+    public Client getClientById(int id) {
+        return clientRepository.getById(id);
     }
 }
