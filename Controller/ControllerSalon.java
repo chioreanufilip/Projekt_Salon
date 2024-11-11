@@ -18,7 +18,6 @@ public class ControllerSalon {
     private final Repository<Review> reviewRepository;
     private final Repository<Client> clientRepository;
 
-
     public ControllerSalon(Repository<Barber> barberRepository, Repository<NailPainter> nailPainterRepository,
                            Repository<Produce> produceRepository, Repository<Pedicurist> pedicuristRepository,
                            Repository<Service> serviceRepository, Repository<Appointment> appointmentRepository, Repository<Payment> paymentRepository,
@@ -98,11 +97,16 @@ public class ControllerSalon {
     }
 
     // Appointment
-    public void enrollAppointment(int id, LocalDateTime time,Client client,Service service, Employee employee) {
-        Appointment appointment = new Appointment(id, time,client,service, employee);///////////////////////////////////////////////////////////////////////
+    public void enrollAppointment(Integer id, String time,Client client,List<Service> service) {
+        Appointment appointment = new Appointment(id, time,client,service);///////////////////////////////////////////////////////////////////////
         appointmentRepository.create(appointment);
     }
-
+    public void enrollClient(Integer id, String name, String phoneNumber){
+        clientRepository.create(new Client(id,name,phoneNumber));
+    }
+    public List<Client> getAllClients(){
+        return clientRepository.getAll();
+    }
     public void deleteAppointment(Integer id) {
         appointmentRepository.delete(id);
     }
@@ -116,9 +120,15 @@ public class ControllerSalon {
     }
 
     // Payment
-    public void enrollPayment(Integer id, Double amount, String method) {
-        Payment payment = new Payment(id, method, amount);
+    public void enrollPayment(Integer id,List<Service> services, List<Produce> products) {
+        Payment payment = new Payment(id, services, products);
         paymentRepository.create(payment);
+    }
+    public List<Payment> getAllPayment(){
+        return paymentRepository.getAll();
+    }
+    public Payment getPaymentById(Integer id){
+        return paymentRepository.getById(id);
     }
     public void deletePayment(Integer id) {
         paymentRepository.delete(id);

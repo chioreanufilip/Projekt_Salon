@@ -6,16 +6,16 @@ import Module.HasId;
 
 public class Appointment implements HasId {
     private Integer ID;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private String status;
     private Client client;
-    private Service service;
+    private List<Service> service;
     private Employee employee;
     private List<Produce> products;
     private Payment payment;
 
 
-    public Appointment(Integer ID, LocalDateTime dateTime, Client client, Service service, Employee employee) {
+    public Appointment(Integer ID, String dateTime, Client client, List<Service> service) {
         this.ID = ID;
         this.dateTime = dateTime;
         this.status = status;
@@ -34,11 +34,11 @@ public class Appointment implements HasId {
         this.ID = ID;
     }
 
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -58,13 +58,13 @@ public class Appointment implements HasId {
         this.client = client;
     }
 
-    public Service getService() {
-        return service;
-    }
+//    public Service getService() {
+//        return service;
+//    }
 
-    public void setService(Service service) {
-        this.service = service;
-    }
+//    public void setService(Service service) {
+//        this.service = service;
+//    }
 
     public Employee getEmployee() {return employee;}
 

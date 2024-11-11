@@ -1,5 +1,4 @@
 package Module;
-
 import Module.HasId;
 
 public class Client implements HasId {
@@ -8,7 +7,7 @@ public class Client implements HasId {
     private String phoneNumber;
     private String email;
 
-    public Client(int id, String name, String phoneNumber, String email) {
+    public Client( Integer id, String name, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
