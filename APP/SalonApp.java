@@ -180,11 +180,32 @@ public class SalonApp {
 
                 }
                 System.out.println("You have to pay :\n" +
-                        controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount()+
-                        "Lei Moldovenesti");
+                        controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount());
 
                 ///si de aici pui in apointment si calculezi pretu unde il faci +pretul produselor din products.
 //                allServices.forEach(System.out.println(.););
+                // Create appointment
+                double totalPrice = chosenService.get(0).getPrice();
+                for (Produce product : products) {
+                    totalPrice += product.getPrice(); // Add price of products to total price
+                }
+
+                if (controllerSalon.getAllAppointments().isEmpty()) {
+                    controllerSalon.enrollAppointment(1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                } else {
+                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                }
+
+//                // Create payment
+//                if (controllerSalon.getAllPayment().isEmpty()) {
+//                    controllerSalon.enrollPayment(1, totalPrice, chosenService, products);
+//                } else {
+//                    controllerSalon.enrollPayment(controllerSalon.getAllPayments().getLast().getId() + 1, totalPrice, chosenService, products);
+//                }
+//
+//                System.out.println("You have to pay: " + totalPrice + " Lei");
+
+
                 menu();
                 break;
 
