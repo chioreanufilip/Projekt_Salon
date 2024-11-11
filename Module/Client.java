@@ -14,10 +14,6 @@ public class Client implements HasId {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
@@ -44,5 +40,11 @@ public class Client implements HasId {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    @Override
+    public Integer getId() {
+        return id;
     }
 }
