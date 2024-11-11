@@ -58,9 +58,9 @@ public class Appointment implements HasId {
         this.client = client;
     }
 
-//    public Service getService() {
-//        return service;
-//    }
+    public List<Service> getService() {
+        return service;
+    }
 
 //    public void setService(Service service) {
 //        this.service = service;

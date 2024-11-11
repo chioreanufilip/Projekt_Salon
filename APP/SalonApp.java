@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -109,15 +110,18 @@ public class SalonApp {
                 while(time ==Boolean.TRUE){
                 System.out.println("Please enter the time for the appointment like this zz/ll h/m: ");
                 time1=scan.next();
-                if (controllerSalon.getAllAppointments().size()==0){
+                if (controllerSalon.getAllAppointments().isEmpty()){
                     time=Boolean.FALSE;
                 }
                 for (int i=0;i<controllerSalon.getAllAppointments().size();i++){
-                    if (controllerSalon.getAllAppointments().get(i).getDateTime()==time1){
+                    String timeToCompare =controllerSalon.getAllAppointments().get(i).getDateTime();
+                    if (!Objects.equals(timeToCompare, time1)){
+                        System.out.println(controllerSalon.getAllAppointments().get(i).getDateTime());
                         time=Boolean.FALSE;
                     }
                     else {
                         System.out.println("Sorry that time is taken\n");
+                        break;
                     }
                 }
                 }
@@ -219,7 +223,8 @@ public class SalonApp {
 
             case 2:
                 System.out.println("1- create\n" +
-                        "2- delete");
+                        "2- delete\n" +
+                        "3- view appointments");
 
         Scanner scan1 = new Scanner(System.in);
         int selection1 = scan1.nextInt();
@@ -341,6 +346,15 @@ public class SalonApp {
                 }
 
             break;
+            case 3:
+                for (Appointment apointment: controllerSalon.getAllAppointments()){
+                    System.out.println("Name: "+apointment.getClient().getName()+ " Date: "+ apointment.getDateTime()+" ");
+                    for(Service service: apointment.getService()) {
+                        System.out.println(service.getName()+" ");
+                    }
+                }
+                menu();
+                break;
         }
     }
     }
