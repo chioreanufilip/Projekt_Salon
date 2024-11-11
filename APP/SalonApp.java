@@ -353,6 +353,8 @@ public class SalonApp {
                         System.out.println(service.getName()+" ");
                     }
                 }
+                menu();
+                break;
         }
     }
     }
