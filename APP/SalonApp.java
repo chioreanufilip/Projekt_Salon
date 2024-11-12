@@ -12,7 +12,7 @@ import Module.Review;
 import Module.Appointment;
 import Module.Client;
 import Module.Payment;
-
+import ServiceSalon.ServiceSalon;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.Duration;
@@ -27,7 +27,7 @@ public class SalonApp {
 //    ControllerSalon controller = new ControllerSalon();
     public SalonApp() {
 //        this.Controller = controller;
-    }
+    }///creates all the necesery repositories
     Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
     Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
     Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
@@ -37,7 +37,8 @@ public class SalonApp {
     Repository<Review> repoReview = new InMemoryRepository<Review>();
     Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
     Repository<Client> repoClient = new InMemoryRepository<Client>();
-    ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+    ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+    ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
     public void initialize(){
         repoBarb.create(new Barber("Bob","Wolfcut, Fades, Fringe",1,"Wolfcut",Integer.valueOf(1)));
         repoNail.create(new NailPainter("Costel",2,"NailPainting","yes",Integer.valueOf(1)));
@@ -50,17 +51,12 @@ public class SalonApp {
         repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,Integer.valueOf(1)));
         repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,Integer.valueOf(4)));
         repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,Integer.valueOf(3)));
-//        repoClient.create(new Client(1, "Alice", "123456789", "alice@example.com"));
-//        repoClient.create(new Client(2, "Bob", "987654321", "bob@example.com"));
+
 
     }
     public void menu() {
         initialize();
-//        Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
-//        Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
-//        Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
-//        Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
-//        ControllerSalon controllerSalon = new ControllerSalon(repoBarb,repoNail,repoProduct,repoPedi);
+        ///The main menu from where you can delete employees or add appointments or make reviews
         System.out.println("Welcome to Menu: \n" +
                 "1 - make appointment\n" +
                 "2 - admin\n" +
@@ -77,7 +73,7 @@ public class SalonApp {
                     System.out.println(i+" "+allServices.get(i-1).getName());
                 }
                 Scanner scan9 = new Scanner(System.in);
-                int services = scan9.nextInt();/// aici decizia de service ar trebui bagata in apointment
+                int services = scan9.nextInt();
                 chosenService.add(allServices.get(services-1));
                 List<Produce> allProduce = controllerSalon.getAllProduce();
                 System.out.println("Please select the product that you want the employee to use on you: ");
@@ -89,6 +85,7 @@ public class SalonApp {
                 List<Produce> products=new ArrayList<Produce>() ;
                 int choice1=scan9.nextInt();
                 products.add(allProduce.get(choice1-1));
+
                 int yes=1;
                 while (yes==1) {
                     System.out.println("Want to choose another product?: \n" +
@@ -105,9 +102,10 @@ public class SalonApp {
                         products.add(allProduce.get(choice1-1));
                     }
                 }
-                Boolean time = Boolean.TRUE;
+                ///checks if the appointmets have the same time
+                boolean time = Boolean.TRUE;
                 String time1 = null;
-                while(time ==Boolean.TRUE){
+                while(time == Boolean.TRUE){
                 System.out.println("Please enter the time for the appointment like this zz/ll h/m: ");
                 time1=scan.next();
                 if (controllerSalon.getAllAppointments().isEmpty()){
@@ -116,7 +114,7 @@ public class SalonApp {
                 for (int i=0;i<controllerSalon.getAllAppointments().size();i++){
                     String timeToCompare =controllerSalon.getAllAppointments().get(i).getDateTime();
                     if (!Objects.equals(timeToCompare, time1)){
-                        System.out.println(controllerSalon.getAllAppointments().get(i).getDateTime());
+//                        System.out.println(controllerSalon.getAllAppointments().get(i).getDateTime());
                         time=Boolean.FALSE;
                     }
                     else {
@@ -169,13 +167,13 @@ public class SalonApp {
                         }
                         break;
                 }
-                if (controllerSalon.getAllAppointments().isEmpty()){
-                controllerSalon.enrollAppointment(1,time1,controllerSalon.getAllClients().get(clientId),chosenService);
-
-            }
-                else {
-                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
-                }
+//                if (controllerSalon.getAllAppointments().isEmpty()){
+//                controllerSalon.enrollAppointment(1,time1,controllerSalon.getAllClients().get(clientId),chosenService);
+//
+//            }
+//                else {
+//                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+//                }
                 if (controllerSalon.getAllPayment().isEmpty()){
                     controllerSalon.enrollPayment(1,chosenService,products);
                 }
@@ -186,9 +184,6 @@ public class SalonApp {
                 System.out.println("You have to pay :\n" +
                         controllerSalon.getPaymentById(controllerSalon.getAllPayment().getLast().getId()).getAmount());
 
-                ///si de aici pui in apointment si calculezi pretu unde il faci +pretul produselor din products.
-//                allServices.forEach(System.out.println(.););
-                // Create appointment
                 double totalPrice = chosenService.get(0).getPrice();
                 for (Produce product : products) {
                     totalPrice += product.getPrice(); // Add price of products to total price
@@ -199,16 +194,6 @@ public class SalonApp {
                 } else {
                     controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
                 }
-
-//                // Create payment
-//                if (controllerSalon.getAllPayment().isEmpty()) {
-//                    controllerSalon.enrollPayment(1, totalPrice, chosenService, products);
-//                } else {
-//                    controllerSalon.enrollPayment(controllerSalon.getAllPayments().getLast().getId() + 1, totalPrice, chosenService, products);
-//                }
-//
-//                System.out.println("You have to pay: " + totalPrice + " Lei");
-
 
                 menu();
                 break;
@@ -238,7 +223,6 @@ public class SalonApp {
                 int selection2 = scan2.nextInt();
                 switch (selection2) {
                     case 1:
-//                        Scanner scan3 = new Scanner(System.in);
                         System.out.println("Enter Name");
                         String name = scan2.next();
                         System.out.println("Enter Hairstyles:\n");
@@ -250,13 +234,6 @@ public class SalonApp {
                         System.out.println("Enter id: ");
                         Integer id = (Integer) scan2.nextInt();
                         controllerSalon.enrollBarber(name, hairstyles, experience, specialize,id);
-//                        repoBarb.getAll().forEach(System.out::println);
-//                        for (int i =0;i<repoBarb.getAll().size();i++){
-//                            System.out.println(repoBarb.getAll().get(i).getName());
-//                        }
-//                        Barber ion = new Barber(name, hairstyles, experience, specialize);
-//                        System.out.println(ion.getSizeBarber());
-//                        System.out
                         menu();
                         break;
                     case 2:
@@ -271,8 +248,6 @@ public class SalonApp {
                         System.out.println("Enter id: ");
                         Integer id2 = (Integer) scan2.nextInt();
                         controllerSalon.enrollNailPainter(name1,experience1,speciality,gelExperience,id2);
-//                        NailPainter ionica = new NailPainter(name1, experience1, speciality, gelExperience);
-//                        System.out.println(ionica.getSize());
                         menu();
                         break;
                     case 3:
@@ -286,8 +261,6 @@ public class SalonApp {
                         String footCare = scan2.next();
                         System.out.println("Enter id: ");
                         Integer id1 = (Integer) scan2.nextInt();
-//                        Pedicurist ionicosul = new Pedicurist(name2, experience3, speciality3, footCare);
-//                        System.out.println(ionicosul.getSize());
                         controllerSalon.enrollPedicurist(name2,experience3,speciality3,footCare,id1);
                         menu();
                         break;
@@ -390,6 +363,7 @@ public class SalonApp {
                 String comment = scanner.nextLine();
 
                 Review review = new Review(reviewId, rating, comment);
+//                review.setClientId(clientId);
                 controllerSalon.enrollReview(reviewId, comment, rating);
                 System.out.println("Thank you, " + client.getName() + ", for your review!");
                 break;
@@ -402,24 +376,21 @@ public class SalonApp {
                     System.out.println("All Reviews:");
                     for (Review reviewItem : allReviews) {
                         System.out.println("ID: " + reviewItem.getId() + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
+//                        System.out.println("the client " + controllerSalon.getClientById(reviewItem.getClientId()-1) + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
                     }
                 }
                 break;
+//            case 3:
+//                System.out.println("Enter Review ID: ");
+//                int reviewId1 = scanner.nextInt();
+
 
         }
         menu();
     }
 
     public static void main(String[] args) {
-//        Repository<Barber> repoBarber =
         SalonApp menu = new SalonApp();
         menu.menu();
     }
-//
-//
-//    public int getSelection() {
-//        return selection;
-//    }
-//    public
-//    switch ()
 }
