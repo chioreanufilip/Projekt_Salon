@@ -4,7 +4,7 @@ public class Review implements HasId {
     private Integer id;
     private int rating;
     private String comment;
-
+    private Integer clientId;
     public Review(Integer id, int rating, String comment) {
         this.id = id;
         this.rating = rating;
@@ -33,5 +33,13 @@ public class Review implements HasId {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 }
