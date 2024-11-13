@@ -14,7 +14,14 @@ public class Appointment implements HasId {
     private List<Produce> products;
     private Payment payment;
 
-
+    /**
+     * constructor
+     *
+     * @param ID
+     * @param dateTime
+     * @param client
+     * @param service
+     */
     public Appointment(Integer ID, String dateTime, Client client, List<Service> service) {
         this.ID = ID;
         this.dateTime = dateTime;
@@ -26,22 +33,42 @@ public class Appointment implements HasId {
         this.payment = payment;
     }
 
+    /**
+     * gets id
+     * @return
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * sets id
+     * @param ID
+     */
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
+    /**
+     * gets date time
+     * @return
+     */
     public String getDateTime() {
         return dateTime;
     }
 
+    /**
+     * sets date time
+     * @param dateTime
+     */
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }
