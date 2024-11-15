@@ -125,9 +125,11 @@ public class SalonApp {
                 }
                 System.out.println("Is it your first appointment?: \n" +
                         "1- yes\n" +
-                        "2-no\n");
+                        "2-no\n"+
+                        "3- I have more than 3 appointments");
                 int choise1=scan.nextInt();
                 Integer clientId=0;
+
                 switch (choise1){
                     case 1:
                         System.out.println("Enter your name: \n");
@@ -166,14 +168,44 @@ public class SalonApp {
                             }
                         }
                         break;
+                    case 3:
+                        // Client with more than 3 appointments
+                        System.out.println("Enter your name: \n");
+                        name = scan.next();
+                        System.out.println("Enter your phone number: \n");
+                        phone = scan.next();
+                        for (int i = 0; i < controllerSalon.getAllClients().size(); i++) {
+                            if (controllerSalon.getAllClients().get(i).getPhoneNumber().equals(phone) && controllerSalon.getAllClients().get(i).getName().equals(name)) {
+                                clientId = i;
+                                Client existingClient = controllerSalon.getAllClients().get(clientId);
+
+                                // Count the number of appointments for this client
+                                long clientAppointmentCount = controllerSalon.getAllAppointments().stream()
+                                        .filter(appointment -> appointment.getClient().equals(existingClient))
+                                        .count();
+
+                                if (clientAppointmentCount > 3) {
+                                    // Inform the client that they have more than 3 appointments
+                                    System.out.println("Welcome back, " + name + "! You have more than 3 appointments.");
+                                    // Call the method to apply the loyalty discount
+                                    System.out.println("Do you want to apply your 50% loyalty discount? (yes/no)");
+                                    String applyDiscount = scan.next();
+                                    if (applyDiscount.equalsIgnoreCase("yes")) {
+                                        // Assuming you have appointmentId available for the client
+                                        System.out.println("Enter your appointment ID to apply the discount:");
+                                        Integer appointmentId = scan.nextInt();
+                                        controllerSalon.applyLoyaltyDiscount(existingClient.getId(), appointmentId);
+                                        System.out.println("50% loyalty discount applied!");
+                                    }
+                                } else {
+                                    System.out.println("You do not qualify for the loyalty discount yet.");
+                                }
+                                break;
+                            }
+                        }
+                        break;
                 }
-//                if (controllerSalon.getAllAppointments().isEmpty()){
-//                controllerSalon.enrollAppointment(1,time1,controllerSalon.getAllClients().get(clientId),chosenService);
-//
-//            }
-//                else {
-//                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
-//                }
+
                 if (controllerSalon.getAllPayment().isEmpty()){
                     controllerSalon.enrollPayment(1,chosenService,products);
                 }
@@ -376,14 +408,9 @@ public class SalonApp {
                     System.out.println("All Reviews:");
                     for (Review reviewItem : allReviews) {
                         System.out.println("ID: " + reviewItem.getId() + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
-//                        System.out.println("the client " + controllerSalon.getClientById(reviewItem.getClientId()-1) + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
                     }
                 }
                 break;
-//            case 3:
-//                System.out.println("Enter Review ID: ");
-//                int reviewId1 = scanner.nextInt();
-
 
         }
         menu();
