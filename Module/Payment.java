@@ -10,8 +10,6 @@ public class Payment implements HasId{
 
     public Payment(Integer id, List<Service> services, List<Produce> products) {
         this.id = id;
-//        this.method = method;
-//        this.amount = 0;
         for (int i = 0; i < services.size(); i++) {
             amount+=services.get(i).getPrice();
         }
@@ -24,20 +22,10 @@ public class Payment implements HasId{
         return amount;
     }
 
+    public void setAmount(double amount) {this.amount = amount;}
+
     public String getMethod() {
         return method;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-//    public static Payment createPaymentForAppointment(Service service, List<Produce> products, String paymentMethod, int paymentId) {
-//        double totalAmount = service.getPrice();  // Start with the service price
-//        for (Produce product : products) {
-//            totalAmount += product.getPrice();  // Add product prices
-//        }
-//        return new Payment(Integer.valueOf(paymentId), paymentMethod, Double.valueOf(totalAmount));
-//    }
-
-}
+    public Integer getId() {return id; }

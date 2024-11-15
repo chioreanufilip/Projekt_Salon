@@ -141,4 +141,34 @@ public class ServiceSalon{
         apointment.getClient().setId(newClient.getId());
         appointmentRepository.update(apointment);
     }
+
+    public void enrollAppointmentWithDiscount(Integer id, String time, Client client, List<Service> services) {
+        // Check if client has more than 3 appointments
+        List<Appointment> clientAppointments = appointmentRepository.getAll().stream()
+                .filter(appointment -> appointment.getClient().getId().equals(client.getId()))
+                .toList();
+
+        double discountRate = 0.5;
+        boolean isDiscountEligible = clientAppointments.size() >= 3;
+
+        // Calculate total service price
+        double totalServicePrice = services.stream().mapToDouble(Service::getPrice).sum();
+
+        // Apply discount if eligible
+        double finalPrice = isDiscountEligible ? totalServicePrice * discountRate : totalServicePrice;
+
+        // Create payment with discounted amount
+        Payment payment = new Payment(id, services, List.of()); // Assuming no products included here
+        payment.setAmount(finalPrice); // We need to add this setter in Payment
+
+        // Create and save appointment with discount, if eligible
+        Appointment appointment = new Appointment(id, time, client, services);
+        appointment.setPayment(payment);
+        appointmentRepository.create(appointment);
+
+        if (isDiscountEligible) {
+            System.out.println("A 50% discount has been applied to client " + client.getName() + "'s appointment.");
+        }
+    }
+
 }

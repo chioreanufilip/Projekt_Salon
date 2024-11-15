@@ -89,10 +89,6 @@ public class Appointment implements HasId {
         return service;
     }
 
-//    public void setService(Service service) {
-//        this.service = service;
-//    }
-
     public Employee getEmployee() {return employee;}
 
     public void setEmployee(Employee employee) {this.employee = employee;}
