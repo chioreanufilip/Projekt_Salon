@@ -2,7 +2,7 @@ package Module;
 
 import java.util.List;
 
-public class Payment implements HasId{
+public class Payment implements HasId {
 
     private Integer id;
     private String method;
@@ -11,10 +11,10 @@ public class Payment implements HasId{
     public Payment(Integer id, List<Service> services, List<Produce> products) {
         this.id = id;
         for (int i = 0; i < services.size(); i++) {
-            amount+=services.get(i).getPrice();
+            amount += services.get(i).getPrice();
         }
         for (int i = 0; i < products.size(); i++) {
-            amount+=products.get(i).getPrice();
+            amount += products.get(i).getPrice();
         }
     }
 
@@ -22,10 +22,15 @@ public class Payment implements HasId{
         return amount;
     }
 
-    public void setAmount(double amount) {this.amount = amount;}
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
     public String getMethod() {
         return method;
     }
 
-    public Integer getId() {return id; }
+    public Integer getId() {
+        return id;
+    }
+}

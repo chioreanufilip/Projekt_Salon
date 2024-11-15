@@ -142,34 +142,51 @@ public class ServiceSalon{
         appointmentRepository.update(apointment);
     }
 
-    public void enrollAppointmentWithDiscount(Integer id, String time, Client client, List<Service> services) {
-        // Check if client has more than 3 appointments
-        List<Appointment> clientAppointments = appointmentRepository.getAll().stream()
-                .filter(appointment -> appointment.getClient().getId().equals(client.getId()))
-                .toList();
+    public void applyLoyaltyDiscount(Integer clientId, Integer appointmentId) {
 
-        double discountRate = 0.5;
-        boolean isDiscountEligible = clientAppointments.size() >= 3;
+        List<Appointment> allAppointments = appointmentRepository.getAll();
 
-        // Calculate total service price
-        double totalServicePrice = services.stream().mapToDouble(Service::getPrice).sum();
+        // Count the number of appointments for the specified client
+        long clientAppointmentCount = allAppointments.stream()
+                .filter(appointment -> appointment.getClient().getId().equals(clientId))
+                .count();
 
-        // Apply discount if eligible
-        double finalPrice = isDiscountEligible ? totalServicePrice * discountRate : totalServicePrice;
+        // Check if the client has more than 3 appointments
+        if (clientAppointmentCount > 3) {
+            // Retrieve the specific appointment where we want to apply the discount
+            Appointment appointment = appointmentRepository.getById(appointmentId);
 
-        // Create payment with discounted amount
-        Payment payment = new Payment(id, services, List.of()); // Assuming no products included here
-        payment.setAmount(finalPrice); // We need to add this setter in Payment
+            if (appointment != null) {
+                // Apply a 50% discount to the appointment's payment
+                List<Service> services = appointment.getService();
+                List<Produce> products = appointment.getProducts();
 
-        // Create and save appointment with discount, if eligible
-        Appointment appointment = new Appointment(id, time, client, services);
-        appointment.setPayment(payment);
-        appointmentRepository.create(appointment);
+                // Calculate the total cost of services and products
+                double originalAmount = 0.0;
+                for (Service service : services) {
+                    originalAmount += service.getPrice();
+                }
+                for (Produce product : products) {
+                    originalAmount += product.getPrice();
+                }
+                // Apply 50% discount
+                double discountedAmount = originalAmount * 0.5;
 
-        if (isDiscountEligible) {
-            System.out.println("A 50% discount has been applied to client " + client.getName() + "'s appointment.");
+                // Update the payment amount with the discounted value
+                Payment payment = appointment.getPayment();
+                if (payment != null) {
+                    payment.setAmount(discountedAmount);
+                    paymentRepository.update(payment); // Update payment in the repository
+                } else {
+                    // If no payment exists, create a new one with the discounted amount
+                    Payment newPayment = new Payment(appointmentId, services, products);
+                    newPayment.setAmount(discountedAmount);
+                    appointment.setPayment(newPayment);
+                    appointmentRepository.update(appointment); // Update the appointment in the repository
+                }
+
+//                System.out.println("50% loyalty discount applied to appointment ID: " + appointmentId);
+            }
         }
     }
-
-
 }
