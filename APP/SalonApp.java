@@ -167,13 +167,7 @@ public class SalonApp {
                         }
                         break;
                 }
-//                if (controllerSalon.getAllAppointments().isEmpty()){
-//                controllerSalon.enrollAppointment(1,time1,controllerSalon.getAllClients().get(clientId),chosenService);
-//
-//            }
-//                else {
-//                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
-//                }
+
                 if (controllerSalon.getAllPayment().isEmpty()){
                     controllerSalon.enrollPayment(1,chosenService,products);
                 }
@@ -376,14 +370,9 @@ public class SalonApp {
                     System.out.println("All Reviews:");
                     for (Review reviewItem : allReviews) {
                         System.out.println("ID: " + reviewItem.getId() + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
-//                        System.out.println("the client " + controllerSalon.getClientById(reviewItem.getClientId()-1) + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
                     }
                 }
                 break;
-//            case 3:
-//                System.out.println("Enter Review ID: ");
-//                int reviewId1 = scanner.nextInt();
-
 
         }
         menu();
