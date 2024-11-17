@@ -6,6 +6,13 @@ public interface Repository <T > {
     void update(T obj);
     void delete(Integer id);
     List<T> getAll();
-    T getById(int id);
+    T getById(Integer id);
 
+//    /**
+//     * Retrieves an object from the repository by its ID.
+//     *
+//     * @param id The unique identifier of the object to retrieve.
+//     * @return The object with the specified ID, or null if not found.
+//     */
+//    T get(Integer id);
 }

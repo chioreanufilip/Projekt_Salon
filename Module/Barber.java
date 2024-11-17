@@ -15,6 +15,7 @@ public class Barber extends Employee {
         this.hairStyle = hairStyle;
     }
 
+    public Barber() {};
     public Barber(String name, String hairStyle, int experience, String speciality, Integer id) {
         super(name,experience,speciality,id);
         this.hairStyle = hairStyle;

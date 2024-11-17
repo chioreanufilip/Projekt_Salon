@@ -2,10 +2,10 @@ package Module;
 
 public class Review implements HasId {
     private Integer id;
-    private int rating;
+    private Integer rating;
     private String comment;
     private Integer clientId;
-    public Review(Integer id, int rating, String comment) {
+    public Review(Integer id, Integer rating, String comment) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
@@ -42,4 +42,5 @@ public class Review implements HasId {
     public void setClientId(Integer clientId) {
         this.clientId = clientId;
     }
+    public Review() {}
 }

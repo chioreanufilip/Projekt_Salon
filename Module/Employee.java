@@ -6,6 +6,7 @@ protected Integer id;
     protected String name;
 protected Integer experience;
 protected String speciality;
+protected Employee() {};
 protected Employee(String name, Integer experience, String speciality,Integer id) {
     this.name = name;
     this.experience = experience;

@@ -17,4 +17,5 @@ public class NailPainter extends Employee{
 //    public int getSize(){
 //        return nails.size();
     }
+    public NailPainter(){};
 }

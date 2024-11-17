@@ -19,4 +19,5 @@ public class Pedicurist extends Employee{
 //    public int getSize() {
 //        return pedicurists.size();
     }
+    public Pedicurist(){}
 }

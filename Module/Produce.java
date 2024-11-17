@@ -55,4 +55,5 @@ public class Produce implements HasId{
     public void setType(Integer type) {
         this.type = type;
     }
+    public Produce(){}
 }

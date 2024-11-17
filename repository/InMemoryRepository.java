@@ -31,7 +31,7 @@ public List<T> getAll() {
         return data.values().stream().toList();
     }
 @Override
-public T getById(int id) {
+public T getById(Integer id) {
     return data.get(id);
 }
 
