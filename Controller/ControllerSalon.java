@@ -128,7 +128,7 @@ public class ControllerSalon {
      * @param price    The price of the service.
      * @param type     The type/category of the service.
      */
-    public void addService(int ID, String name, Duration duration, double price, Integer type) {
+    public void addService(int ID, String name, String duration, double price, Integer type) {
         serviceSalon.addService(ID, name, duration, price, type);
     }
 
@@ -306,5 +306,20 @@ public class ControllerSalon {
      */
     public void applyLoyaltyDiscount(Integer clientId, Integer appointmentId) {
         serviceSalon.applyLoyaltyDiscount(clientId, appointmentId);
+    }
+    public List<Produce> sortProductByPrice(){
+        return serviceSalon.sortProductsByPrice();
+    }
+    public List<Appointment> sortByTimeAppointments(){
+        return serviceSalon.sortAppointmentsByTime();
+    }
+    public List<Review> filterByRatingReview(Integer rating) {
+        return serviceSalon.filterReviewsByRating(rating);
+    }
+    public List<Payment> filterPaymentByClient(Integer clientId) {
+        return serviceSalon.filterPaymentsByClients(clientId);
+    }
+    public void getThemBonuses(String year_month){
+        serviceSalon.getbonuses(year_month);
     }
 }

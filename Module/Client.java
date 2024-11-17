@@ -13,7 +13,7 @@ public class Client implements HasId {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
+    public Client(){}
     public String getName() {
         return name;
     }

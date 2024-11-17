@@ -5,6 +5,7 @@ import Module.NailPainter;
 import Module.Pedicurist;
 import Module.Produce;
 import repository.InMemoryRepository;
+import repository.InFileRepository;
 import repository.Repository;
 import Controller.ControllerSalon;
 import Module.Service;
@@ -15,12 +16,13 @@ import Module.Payment;
 import ServiceSalon.ServiceSalon;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.time.Duration;
+//import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ThreadPoolExecutor;
+//import  org.json.simple.JSONObject;
 
 public class SalonApp {
 //    private final Controller =Controller;
@@ -28,15 +30,25 @@ public class SalonApp {
     public SalonApp() {
 //        this.Controller = controller;
     }///creates all the necesery repositories
-    Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
-    Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
-    Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
-    Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
-    Repository<Service> repoService = new InMemoryRepository<Service>();
-    Repository<Payment> repoPayment = new InMemoryRepository<Payment>();
-    Repository<Review> repoReview = new InMemoryRepository<Review>();
-    Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
-    Repository<Client> repoClient = new InMemoryRepository<Client>();
+//    Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
+//    Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
+//    Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
+//    Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
+//    Repository<Service> repoService = new InMemoryRepository<Service>();
+//    Repository<Payment> repoPayment = new InMemoryRepository<Payment>();
+//    Repository<Review> repoReview = new InMemoryRepository<Review>();
+//    Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
+//    Repository<Client> repoClient = new InMemoryRepository<Client>();
+
+    Repository<Barber> repoBarb = new InFileRepository<Barber>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\barbers.json",Barber.class);
+    Repository<NailPainter> repoNail = new InFileRepository<NailPainter>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\nailPainters.json",NailPainter.class);
+    Repository<Pedicurist> repoPedi = new InFileRepository<Pedicurist>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\pedicurist.json",Pedicurist.class);
+    Repository<Produce> repoProduct = new InFileRepository<Produce>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\products.json",Produce.class);
+    Repository<Service> repoService = new InFileRepository<Service>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\service.json",Service.class);
+    Repository<Payment> repoPayment = new InFileRepository<Payment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\Payment.json",Payment.class);
+    Repository<Review> repoReview = new InFileRepository<Review>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\review.json",Review.class);
+    Repository<Appointment> repoAppointment = new InFileRepository<Appointment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\appointment.json",Appointment.class);
+    Repository<Client> repoClient = new InFileRepository<Client>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\client.json",Client.class);
     ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
     ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
     public void initialize(){
@@ -48,9 +60,9 @@ public class SalonApp {
         repoProduct.create(new Produce("Nail Polish",Double.valueOf(45.83),Integer.valueOf(15),Integer.valueOf(4),Integer.valueOf(3)));
         repoProduct.create(new Produce("Nail gel",Double.valueOf(5.83),Integer.valueOf(4),Integer.valueOf(4),Integer.valueOf(4)));
         repoProduct.create(new Produce("Foot Scrub",Double.valueOf(25.83),Integer.valueOf(9),Integer.valueOf(3),Integer.valueOf(5)));
-        repoService.create(new Service(1,"Haircut", Duration.ofMinutes(50),50,Integer.valueOf(1)));
-        repoService.create(new Service(2,"Finger Nail Painting", Duration.ofMinutes(45),100,Integer.valueOf(4)));
-        repoService.create(new Service(3,"FootMassage", Duration.ofMinutes(55),120,Integer.valueOf(3)));
+        repoService.create(new Service(1,"Haircut", String.valueOf(50),50,Integer.valueOf(1)));
+        repoService.create(new Service(2,"Finger Nail Painting", "45 Minutes",100,Integer.valueOf(4)));
+        repoService.create(new Service(3,"FootMassage", "55 minutes",120,Integer.valueOf(3)));
 
 
     }
@@ -75,7 +87,8 @@ public class SalonApp {
                 Scanner scan9 = new Scanner(System.in);
                 int services = scan9.nextInt();
                 chosenService.add(allServices.get(services-1));
-                List<Produce> allProduce = controllerSalon.getAllProduce();
+//                List<Produce> allProduce = controllerSalon.getAllProduce();
+                List<Produce> allProduce = controllerSalon.sortProductByPrice();
                 System.out.println("Please select the product that you want the employee to use on you: ");
                 for (int i=0;i<allProduce.size();i++){
                     if (allProduce.get(i).getType()==allServices.get(services-1).getType()){
@@ -106,7 +119,7 @@ public class SalonApp {
                 boolean time = Boolean.TRUE;
                 String time1 = null;
                 while(time == Boolean.TRUE){
-                System.out.println("Please enter the time for the appointment like this zz/ll h/m: ");
+                System.out.println("Please enter the time for the appointment like this yyyy-MM-dd hh: ");
                 time1=scan.next();
                 if (controllerSalon.getAllAppointments().isEmpty()){
                     time=Boolean.FALSE;
@@ -224,7 +237,7 @@ public class SalonApp {
                 if (controllerSalon.getAllAppointments().isEmpty()) {
                     controllerSalon.enrollAppointment(1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
                 } else {
-                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getID() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
+                    controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getId() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService);
                 }
 
                 menu();
@@ -241,7 +254,9 @@ public class SalonApp {
             case 2:
                 System.out.println("1- create\n" +
                         "2- delete\n" +
-                        "3- view appointments");
+                        "3- view appointments\n" +
+                        "4- view Payments made by a specific Client\n" +
+                        "5- view bonuses\n");
 
         Scanner scan1 = new Scanner(System.in);
         int selection1 = scan1.nextInt();
@@ -314,6 +329,8 @@ public class SalonApp {
 //                        Produce produce = new Produce(productName, price, stock,id3);
                         controllerSalon.addProduct(productName,price,stock,type,id3);
                         menu();
+                        break;
+
                 }
             break;
             case 2:
@@ -352,12 +369,26 @@ public class SalonApp {
 
             break;
             case 3:
-                for (Appointment apointment: controllerSalon.getAllAppointments()){
+                for (Appointment apointment: controllerSalon.sortByTimeAppointments()){
                     System.out.println("Name: "+apointment.getClient().getName()+ " Date: "+ apointment.getDateTime()+" ");
                     for(Service service: apointment.getService()) {
                         System.out.println(service.getName()+" ");
                     }
                 }
+                menu();
+                break;
+            case 4:
+                System.out.println("Enter client id:\n");
+                int id5 = scan.nextInt();
+                for (Payment payment: controllerSalon.filterPaymentByClient(id5)){
+                    System.out.println("The Payment with the id " + payment.getId()+" and the amouny "+payment.getAmount()+" lei ardelenesti was paid by Client "+controllerSalon.getClientById(id5).getName()+"\n");
+                }
+                menu();
+                break;
+            case 5:
+                System.out.println("Enter the year and month you want to obtain the bonus for (yyyy-MM): \n");
+                String year = scan.next();
+                controllerSalon.getThemBonuses(year);
                 menu();
                 break;
         }
@@ -369,7 +400,8 @@ public class SalonApp {
 
         System.out.println("Review Menu: \n" +
                 "1 - Add a Review\n" +
-                "2 - View All Reviews\n");
+                "2 - View All Reviews\n" +
+                "3 - View Review with a specific rating\n");
         int reviewOption = scanner.nextInt();
 
         switch (reviewOption) {
@@ -412,6 +444,18 @@ public class SalonApp {
                 }
                 break;
 
+            case 3:
+                System.out.print("Enter the Rating (1-5): ");
+                int rating1 = scanner.nextInt();
+                List<Review> reviews = controllerSalon.filterByRatingReview(Integer.valueOf(rating1));
+                if (reviews.isEmpty()) {
+                    System.out.println("No reviews available.");
+                } else {
+                    System.out.println("All Reviews:");
+                    for (Review reviewItem : reviews) {
+                        System.out.println("ID: " + reviewItem.getId() + ", Rating: " + reviewItem.getRating() + ", Comment: " + reviewItem.getComment());
+                    }
+                }
         }
         menu();
     }

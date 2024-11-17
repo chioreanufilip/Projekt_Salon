@@ -13,7 +13,8 @@ public class Appointment implements HasId {
     private Employee employee;
     private List<Produce> products;
     private Payment payment;
-
+    private Appointment type;
+    public Appointment() {}
     /**
      * constructor
      *
@@ -33,13 +34,13 @@ public class Appointment implements HasId {
         this.payment = payment;
     }
 
-    /**
-     * gets id
-     * @return
-     */
-    public int getID() {
-        return ID;
-    }
+//    /**
+//     * gets id
+//     * @return
+//     */
+//    public int getID() {
+//        return ID;
+//    }
 
     /**
      * sets id

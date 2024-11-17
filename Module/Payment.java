@@ -17,7 +17,7 @@ public class Payment implements HasId {
             amount += products.get(i).getPrice();
         }
     }
-
+    public Payment(){}
     public double getAmount() {
         return amount;
     }

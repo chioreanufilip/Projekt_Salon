@@ -4,7 +4,13 @@ import Module.*;
 import repository.Repository;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ServiceSalon{
     private final Repository<Barber> barberRepository;
@@ -65,7 +71,7 @@ public class ServiceSalon{
         return produceRepository.getAll();
     }
 
-    public void addService(int ID, String name, Duration duration, double price, Integer type) {
+    public void addService(int ID, String name, String duration, double price, Integer type) {
         serviceRepository.create(new Service(ID, name, duration, price, type));
     }
 
@@ -189,4 +195,70 @@ public class ServiceSalon{
             }
         }
     }
+    public List<Produce> sortProductsByPrice(){
+//        List<Produce> toSortList = new ArrayList<Produce>();
+        List<Produce> unSortedList = new ArrayList<Produce>(produceRepository.getAll());
+        Produce temp;
+        for (int i = 0; i < unSortedList.size()-1; i++) {
+            for (int j = 0; j < unSortedList.size()-i-1; j++) {
+                if (unSortedList.get(j+1).getPrice() < unSortedList.get(j).getPrice()) {
+                    temp=unSortedList.get(j+1);
+                    unSortedList.set(j+1,unSortedList.get(j));
+                    unSortedList.set(j,temp);
+                }
+            }
+        }
+        return unSortedList;
+    }
+    public List<Appointment> sortAppointmentsByTime(){
+        List<Appointment> toSortedList = new ArrayList<Appointment>(appointmentRepository.getAll());
+        toSortedList.sort(Comparator.comparing(Appointment::getDateTime));
+        return toSortedList;
+    }
+
+    public List<Review> filterReviewsByRating(Integer rating) {
+        List<Review> reviews = new ArrayList<Review>(reviewRepository.getAll());
+        reviews = reviews.stream().filter(rat->rat.getRating()==rating).collect(Collectors.toList());
+        return reviews;
+    }
+    public List<Payment> filterPaymentsByClients(Integer clientId) {
+        List<Payment> payments = new ArrayList<Payment>(paymentRepository.getAll());
+        payments = payments.stream().filter(clieId-> Objects.equals(clieId.getId(), clientId)).toList();
+        return payments;
+    }
+    public void getbonuses(String yyyy_mm){
+        List<Appointment> apointments = appointmentRepository.getAll();
+        Double barberBonus=0.0, nailPainterBonus=0.0,pedicuristBonus=0.0;
+        for (Appointment apointment : apointments) {
+            DateTimeFormatter formatterFull = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String date1 = apointment.getDateTime().substring(0, 10);
+            LocalDate parsedDate1 = LocalDate.parse(date1, formatterFull);
+            String date = yyyy_mm;
+            LocalDate parsedDate2 = LocalDate.parse(date+"-01", formatterFull);
+            LocalDate parsedDate3 = LocalDate.parse(date+"-31", formatterFull);
+            if (parsedDate1.isAfter(parsedDate2) || parsedDate1.isBefore(parsedDate3)) {
+                for (Service service : apointment.getService()) {
+                    if (service.getType() == 1) {
+                        barberBonus += 0.1 * service.getPrice();
+                    }
+                    if (service.getType() == 2) {
+                        nailPainterBonus += 0.1 * service.getPrice();
+                    }
+                    if (service.getType() == 3) {
+                        pedicuristBonus += 0.1 * service.getPrice();
+                    }
+                    if (service.getType() == 4) {
+                        nailPainterBonus+=0.05*service.getPrice();
+                        pedicuristBonus+=0.05*service.getPrice();
+                    }
+                }
+            }
+        }
+        List<Barber> barbers = barberRepository.getAll();
+        List<Pedicurist> pedicurists = pedicuristRepository.getAll();
+        List<NailPainter> nailPainters = nailPainterRepository.getAll();
+        System.out.println("The bonus for the month "+yyyy_mm+" is for each:\nbarber: "+barberBonus/barbers.size()
+        +" Leuti \n"+"pedicurist: "+pedicuristBonus/pedicurists.size()+" Leuti\nnailPainter: "+nailPainterBonus/nailPainters.size()+" Leuti\n");
+    }
 }
+
