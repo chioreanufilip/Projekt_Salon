@@ -2,8 +2,11 @@ package Module;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import Module.HasId;
 
+/**
+ * Represents an appointment in the salon system.
+ * Includes details such as date, time, status, client, services, employee, products, and payment.
+ */
 public class Appointment implements HasId {
     private Integer ID;
     private String dateTime;
@@ -14,14 +17,19 @@ public class Appointment implements HasId {
     private List<Produce> products;
     private Payment payment;
     private Appointment type;
-    public Appointment() {}
+
     /**
-     * constructor
+     * Default constructor for the Appointment class.
+     */
+    public Appointment() {}
+
+    /**
+     * Constructs an Appointment with specified details.
      *
-     * @param ID
-     * @param dateTime
-     * @param client
-     * @param service
+     * @param ID        the unique identifier of the appointment
+     * @param dateTime  the date and time of the appointment
+     * @param client    the client associated with the appointment
+     * @param service   the list of services for the appointment
      */
     public Appointment(Integer ID, String dateTime, Client client, List<Service> service) {
         this.ID = ID;
@@ -34,74 +42,138 @@ public class Appointment implements HasId {
         this.payment = payment;
     }
 
-//    /**
-//     * gets id
-//     * @return
-//     */
-//    public int getID() {
-//        return ID;
-//    }
-
     /**
-     * sets id
-     * @param ID
+     * Sets the unique identifier of the appointment.
+     *
+     * @param ID the unique identifier
      */
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
     /**
-     * gets date time
-     * @return
+     * Retrieves the date and time of the appointment.
+     *
+     * @return the date and time of the appointment
      */
     public String getDateTime() {
         return dateTime;
     }
 
     /**
-     * sets date time
-     * @param dateTime
+     * Sets the date and time of the appointment.
+     *
+     * @param dateTime the date and time to set
      */
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
     /**
+     * Retrieves the current status of the appointment.
      *
-     * @return
+     * @return the status of the appointment
      */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Sets the status of the appointment.
+     *
+     * @param status the status to set (e.g., "scheduled", "completed")
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * Retrieves the client associated with the appointment.
+     *
+     * @return the client of the appointment
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * Sets the client associated with the appointment.
+     *
+     * @param client the client to associate with the appointment
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     * Retrieves the list of services for the appointment.
+     *
+     * @return the list of services
+     */
     public List<Service> getService() {
         return service;
     }
 
-    public Employee getEmployee() {return employee;}
+    /**
+     * Retrieves the employee assigned to the appointment.
+     *
+     * @return the employee associated with the appointment
+     */
+    public Employee getEmployee() {
+        return employee;
+    }
 
-    public void setEmployee(Employee employee) {this.employee = employee;}
+    /**
+     * Sets the employee for the appointment.
+     *
+     * @param employee the employee to assign
+     */
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
-    public List<Produce> getProducts() {return products;}
+    /**
+     * Retrieves the list of products used during the appointment.
+     *
+     * @return the list of products
+     */
+    public List<Produce> getProducts() {
+        return products;
+    }
 
-    public void setProducts(List<Produce> products) {this.products = products;}
+    /**
+     * Sets the list of products for the appointment.
+     *
+     * @param products the list of products to set
+     */
+    public void setProducts(List<Produce> products) {
+        this.products = products;
+    }
 
-    public Payment getPayment() {return payment;}
+    /**
+     * Retrieves the payment details associated with the appointment.
+     *
+     * @return the payment details
+     */
+    public Payment getPayment() {
+        return payment;
+    }
 
-    public void setPayment(Payment payment) {this.payment = payment;}
-    public Integer getId(){
+    /**
+     * Sets the payment details for the appointment.
+     *
+     * @param payment the payment details to associate
+     */
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    /**
+     * Retrieves the unique identifier of the appointment.
+     *
+     * @return the unique identifier of the appointment
+     */
+    public Integer getId() {
         return ID;
     }
 }

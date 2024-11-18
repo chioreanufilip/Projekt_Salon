@@ -1,38 +1,48 @@
 package Module;
 
 import java.util.Vector;
-//import java.util.List;
 
+/**
+ * Represents a barber in the salon system.
+ * Extends the Employee class and includes additional attributes and methods specific to a barber.
+ */
 public class Barber extends Employee {
-//    private static Vector<Barber> barbers = new Vector<>();
     private String hairStyle;
 
+    /**
+     * Retrieves the hair styling specialty of the barber.
+     *
+     * @return the hairstyle specialty of the barber
+     */
     public String getHairStyle() {
         return hairStyle;
     }
 
+    /**
+     * Sets the hair styling specialty of the barber.
+     *
+     * @param hairStyle the hairstyle specialty to set
+     */
     public void setHairStyle(String hairStyle) {
         this.hairStyle = hairStyle;
     }
 
-    public Barber() {};
+    /**
+     * Default constructor for the Barber class.
+     */
+    public Barber() {}
+
+    /**
+     * Constructs a Barber object with specified details.
+     *
+     * @param name        the name of the barber
+     * @param hairStyle   the hair styling specialty of the barber
+     * @param experience  the number of years of experience the barber has
+     * @param speciality  the speciality area of the barber
+     * @param id          the unique identifier of the barber
+     */
     public Barber(String name, String hairStyle, int experience, String speciality, Integer id) {
-        super(name,experience,speciality,id);
+        super(name, experience, speciality, id);
         this.hairStyle = hairStyle;
-//        if (barbers.size() == 0) {
-//            this.id=1;
-//        }
-//        else {
-//            this.id=barbers.lastElement().id+1;
-//        }
-//        barbers.add(this);
     }
-
-//    public int getSizeBarber(){
-//        return barbers.size();
-//    }
-//    public void createBarber(String name, String hairStyle, int experience,String speciality){
-
-//    }
 }
-
