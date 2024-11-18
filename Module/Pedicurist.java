@@ -1,23 +1,30 @@
 package Module;
 import java.util.Vector;
 
-public class Pedicurist extends Employee{
-    private String FootCareSpecialisation;
-//    private static Vector<Pedicurist> pedicurists = new Vector<Pedicurist>();
+/**
+ * Represents a pedicurist, a type of employee who specializes in foot care.
+ * This class extends the {@link Employee} class and adds a specific specialization in foot care.
+ */
+public class Pedicurist extends Employee {
 
-    public Pedicurist(String name,Integer experience,String speciality, String FootCareSpecialisation,Integer id){
-        super(name,experience,speciality,id);
+    private String FootCareSpecialisation;
+
+    /**
+     * Constructs a Pedicurist object with the specified name, experience, specialty, foot care specialization, and ID.
+     *
+     * @param name                  the name of the pedicurist
+     * @param experience            the years of experience the pedicurist has
+     * @param speciality            the general specialty of the pedicurist
+     * @param FootCareSpecialisation the specific specialization of the pedicurist in foot care
+     * @param id                    the unique identifier of the pedicurist
+     */
+    public Pedicurist(String name, Integer experience, String speciality, String FootCareSpecialisation, Integer id) {
+        super(name, experience, speciality, id);
         this.FootCareSpecialisation = FootCareSpecialisation;
-//        if (pedicurists.size() == 0) {
-//            this.id=1;
-//        }
-//        else {
-//            this.id=pedicurists.lastElement().id+1;
-//        }
-//        pedicurists.add(this);
-//    }
-//    public int getSize() {
-//        return pedicurists.size();
     }
-    public Pedicurist(){}
+
+    /**
+     * Default constructor for the Pedicurist class.
+     */
+    public Pedicurist() {}
 }
