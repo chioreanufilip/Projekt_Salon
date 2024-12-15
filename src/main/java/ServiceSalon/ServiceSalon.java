@@ -350,8 +350,16 @@ public class ServiceSalon {
      * @param appointmentId the ID of the appointment for which the discount should be applied
      */
     public void applyLoyaltyDiscount(Integer clientId, Integer appointmentId) {
-        List<Appointment> allAppointments = appointmentRepository.getAll();
-
+        try{List<Appointment> allAppointments = appointmentRepository.getAll();
+        int count =0 ;
+        for (int i=0;i<allAppointments.size();i++){
+            if(Objects.equals(allAppointments.get(i).getClient().getId(), clientId)){
+                count+=1;
+            }
+        }
+        if(count<4){
+            throw new BussinessLogicException ("Too few appointments");
+        }
         // Count the number of appointments for the specified client
 //        long clientAppointmentCount = allAppointments.stream()
 //                .filter(appointment -> appointment.getClient().getId().equals(clientId))
@@ -368,9 +376,9 @@ public class ServiceSalon {
             // Retrieve the specific appointment where we want to apply the discount
             Appointment appointment = appointmentRepository.getById(appointmentId);
             appointment.getPayment().setAmount(appointment.getPayment().getAmount()*0.5);
-            System.out.println(appointment.getPayment().getAmount());
+//            System.out.println(appointment.getPayment().getAmount());
             paymentRepository.update(appointment.getPayment());
-            appointmentRepository.update(appointment);
+//            appointmentRepository.update(appointment);
 //            appointment.setPayment(appointment.getPayment().);
 //            if (appointment != null) {
 //                // Apply a 50% discount to the appointment's payment
@@ -401,7 +409,8 @@ public class ServiceSalon {
 //                    appointmentRepository.update(appointment); // Update the appointment in the repository
 //                }
 //            }
-//        }
+        }
+        catch (BussinessLogicException e){throw new BussinessLogicException("Too few appointments");}
     }
 
     /**
@@ -465,17 +474,22 @@ public class ServiceSalon {
      *
      * @param yyyy_mm the month in "yyyy-MM" format to calculate bonuses for
      */
-    public void getBonuses(String yyyy_mm) {
+    public Double getBonuses(String yyyy_mm) {
         List<Appointment> appointments = appointmentRepository.getAll();
 //        Double barberBonus = 0.0, nailPainterBonus = 0.0, pedicuristBonus = 0.0;
         Double bonus=0.0;
         // Calculate bonuses for services performed within the specified month
+        try{
         for (Appointment appointment : appointments) {
             DateTimeFormatter formatterFull = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String date1 = appointment.getDateTime().substring(0, 10);
             LocalDate parsedDate1 = LocalDate.parse(date1, formatterFull);
             LocalDate parsedDate2 = LocalDate.parse(yyyy_mm + "-01", formatterFull);
             LocalDate parsedDate3 = LocalDate.parse(yyyy_mm + "-31", formatterFull);
+//            LocalDate date4 = LocalDate.parse(LocalDate.now().toString())
+//            if (parsedDate1.isAfter(LocalDate.now())){
+//                throw new BussinessLogicException("The month don t make sense, cause it s in the future");
+//            }
 
             // Check if the appointment date falls within the specified month
             if (parsedDate1.isAfter(parsedDate2) && parsedDate1.isBefore(parsedDate3)) {
@@ -498,6 +512,7 @@ public class ServiceSalon {
             }
         }
 
+
         List<Barber> barbers = barberRepository.getAll();
         List<Pedicurist> pedicurists = pedicuristRepository.getAll();
         List<NailPainter> nailPainters = nailPainterRepository.getAll();
@@ -505,6 +520,11 @@ public class ServiceSalon {
 //        System.out.println("The bonus for the month " + yyyy_mm + " is for each:\nbarber: " + barberBonus / barbers.size()
 //                + " Leuti\npedicurist: " + pedicuristBonus / pedicurists.size() + " Leuti\nnailPainter: "
 //                + nailPainterBonus / nailPainters.size() + " Leuti\n");
+            if (bonus==0.0){throw new BussinessLogicException("No work in that Month");
+            }
         System.out.println("The bonus for the month "+yyyy_mm+" is "+bonus/(barbers.size()+pedicurists.size()+nailPainters.size()));
+            return bonus/(barbers.size()+pedicurists.size()+nailPainters.size());
+        }
+        catch (BussinessLogicException e){throw new BussinessLogicException(e.getMessage());}
     }
 }

@@ -35,6 +35,13 @@ public class Payment implements HasId {
         this.services = services;
         this.products = products;
     }
+    public Payment(Integer id, List<Service> services, List<Produce> products,Integer clientID,Integer amount){
+        this.id = id;
+        this.services = services;
+        this.products = products;
+        this.clientId=clientID;
+        this.amount=amount;
+    }
 
     public List<Produce> getProducts() {
         return products;

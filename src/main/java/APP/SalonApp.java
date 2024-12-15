@@ -1,5 +1,6 @@
 package APP;
 
+
 import Exceptions.ValidationException;
 import Module.Barber;
 import Module.NailPainter;
