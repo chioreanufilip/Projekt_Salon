@@ -18,10 +18,11 @@ public class Review implements HasId {
      * @param rating  the rating provided in the review (e.g., on a scale of 1 to 5)
      * @param comment the comment provided in the review
      */
-    public Review(Integer id, Integer rating, String comment) {
+    public Review(Integer id, Integer rating, String comment, Integer clientID) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
+        this.clientId = clientID;
     }
 
     /**

@@ -1,5 +1,4 @@
 package Module;
-import java.util.Vector;
 
 /**
  * Represents a product used in the salon, such as items for barbers, nail painters, or pedicurists.

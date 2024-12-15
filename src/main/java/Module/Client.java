@@ -1,5 +1,4 @@
 package Module;
-import Module.HasId;
 
 /**
  * Represents a client in the salon system.

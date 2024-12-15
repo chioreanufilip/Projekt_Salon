@@ -8,10 +8,12 @@ import java.util.List;
  * Implements the {@link HasId} interface for unique identification.
  */
 public class Payment implements HasId {
-
+    private List<Service> services;
+    private List<Produce> products;
     private Integer id;
     private String method;
     private double amount;
+    private Integer clientId;
 
     /**
      * Constructs a Payment object with the specified ID and calculates the total amount
@@ -21,7 +23,7 @@ public class Payment implements HasId {
      * @param services  the list of services included in the payment
      * @param products  the list of products included in the payment
      */
-    public Payment(Integer id, List<Service> services, List<Produce> products) {
+    public Payment(Integer id, List<Service> services, List<Produce> products,Integer clientID) {
         this.id = id;
         for (int i = 0; i < services.size(); i++) {
             amount += services.get(i).getPrice();
@@ -29,6 +31,32 @@ public class Payment implements HasId {
         for (int i = 0; i < products.size(); i++) {
             amount += products.get(i).getPrice();
         }
+        this.clientId=clientID;
+        this.services = services;
+        this.products = products;
+    }
+    public Payment(Integer id, List<Service> services, List<Produce> products,Integer clientID,Integer amount){
+        this.id = id;
+        this.services = services;
+        this.products = products;
+        this.clientId=clientID;
+        this.amount=amount;
+    }
+
+    public List<Produce> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Produce> products) {
+        this.products = products;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     /**
@@ -71,4 +99,13 @@ public class Payment implements HasId {
     public Integer getId() {
         return id;
     }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }
 }
+

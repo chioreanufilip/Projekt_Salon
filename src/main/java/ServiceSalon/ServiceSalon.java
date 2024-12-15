@@ -1,10 +1,7 @@
 package ServiceSalon;
 
-import Controller.ControllerSalon;
-import Module.*;
 import repository.Repository;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import Module.*;
+import Exceptions.*;
 
 /**
  * This class provides services to manage various operations in a salon, including enrolling employees,
@@ -110,7 +109,7 @@ public class ServiceSalon {
      * @param name the name of the pedicurist
      * @param experience the pedicurist's years of experience
      * @param speciality the pedicurist's speciality
-     * @param footCareSpecialisation the pedicurist's foot care specialisation
+     * @param FootCareSpecialisation the pedicurist's foot care specialisation
      * @param id the pedicurist's ID
      */
     public void enrollPedicurist(String name, Integer experience, String speciality, String FootCareSpecialisation, Integer id) {
@@ -164,10 +163,10 @@ public class ServiceSalon {
      * @param name the name of the service
      * @param duration the duration of the service
      * @param price the price of the service
-     * @param type the type of the service (1: barber, 2: nail painter, 3: pedicurist, 4: nail painter and pedicurist)
+//     * @param type the type of the service (1: barber, 2: nail painter, 3: pedicurist, 4: nail painter and pedicurist)
      */
-    public void addService(int ID, String name, String duration, double price, Integer type) {
-        serviceRepository.create(new Service(ID, name, duration, price, type));
+    public void addService(int ID, String name, String duration, double price, List<Employee> list) {
+        serviceRepository.create(new Service(ID, name, duration, price, list));
     }
 
     /**
@@ -186,8 +185,8 @@ public class ServiceSalon {
      * @param comment the comment of the review
      * @param rating the rating of the review
      */
-    public void enrollReview(Integer id, String comment, int rating) {
-        reviewRepository.create(new Review(id, rating, comment));
+    public void enrollReview(Integer id, String comment, Integer rating,Integer clientID) {
+        reviewRepository.create(new Review(id, rating, comment,clientID));
     }
 
     /**
@@ -226,9 +225,19 @@ public class ServiceSalon {
      * @param client the client for the appointment
      * @param service the services included in the appointment
      */
-    public void enrollAppointment(Integer id, String time, Client client, List<Service> service) {
-        Appointment appointment = new Appointment(id, time, client, service);
+    public void enrollAppointment(Integer id, String time, Client client, List<Service> service,Payment payment) {
+        try{
+            String[] parts = time.split("-");
+            int year = Integer.parseInt(parts[0]);  // yyyy
+            int month = Integer.parseInt(parts[1]); // MM
+            int day = Integer.parseInt(parts[2]);   // dd
+            int hour = Integer.parseInt(parts[3]);
+            if(year<LocalDate.now().getYear()||month<LocalDate.now().getMonthValue()||day<LocalDate.now().getDayOfMonth()&&month<LocalDate.now().getMonthValue()){
+                throw new BussinessLogicException("The time isn t making sens");
+            }
+        Appointment appointment = new Appointment(id, time, client, service,payment);
         appointmentRepository.create(appointment);
+    }catch (BussinessLogicException e){System.out.println("The Appointment doesn t make sens you have error "+e.getMessage());}
     }
 
     /**
@@ -286,8 +295,8 @@ public class ServiceSalon {
      * @param services the services in the payment
      * @param products the products in the payment
      */
-    public void enrollPayment(Integer id, List<Service> services, List<Produce> products) {
-        Payment payment = new Payment(id, services, products);
+    public void enrollPayment(Integer id, List<Service> services, List<Produce> products,Integer clientID) {
+        Payment payment = new Payment(id, services, products,clientID);
         paymentRepository.create(payment);
     }
 
@@ -308,6 +317,10 @@ public class ServiceSalon {
      */
     public Payment getPaymentById(Integer id) {
         return paymentRepository.getById(id);
+    }
+
+    public Client getClientById(int id){
+        return clientRepository.getById(id);
     }
 
     /**
@@ -337,48 +350,67 @@ public class ServiceSalon {
      * @param appointmentId the ID of the appointment for which the discount should be applied
      */
     public void applyLoyaltyDiscount(Integer clientId, Integer appointmentId) {
-        List<Appointment> allAppointments = appointmentRepository.getAll();
-
-        // Count the number of appointments for the specified client
-        long clientAppointmentCount = allAppointments.stream()
-                .filter(appointment -> appointment.getClient().getId().equals(clientId))
-                .count();
-
-        // Check if the client has more than 3 appointments
-        if (clientAppointmentCount > 3) {
-            // Retrieve the specific appointment where we want to apply the discount
-            Appointment appointment = appointmentRepository.getById(appointmentId);
-
-            if (appointment != null) {
-                // Apply a 50% discount to the appointment's payment
-                List<Service> services = appointment.getService();
-                List<Produce> products = appointment.getProducts();
-
-                // Calculate the total cost of services and products
-                double originalAmount = 0.0;
-                for (Service service : services) {
-                    originalAmount += service.getPrice();
-                }
-                for (Produce product : products) {
-                    originalAmount += product.getPrice();
-                }
-                // Apply 50% discount
-                double discountedAmount = originalAmount * 0.5;
-
-                // Update the payment amount with the discounted value
-                Payment payment = appointment.getPayment();
-                if (payment != null) {
-                    payment.setAmount(discountedAmount);
-                    paymentRepository.update(payment); // Update payment in the repository
-                } else {
-                    // If no payment exists, create a new one with the discounted amount
-                    Payment newPayment = new Payment(appointmentId, services, products);
-                    newPayment.setAmount(discountedAmount);
-                    appointment.setPayment(newPayment);
-                    appointmentRepository.update(appointment); // Update the appointment in the repository
-                }
+        try{List<Appointment> allAppointments = appointmentRepository.getAll();
+        int count =0 ;
+        for (int i=0;i<allAppointments.size();i++){
+            if(Objects.equals(allAppointments.get(i).getClient().getId(), clientId)){
+                count+=1;
             }
         }
+        if(count<4){
+            throw new BussinessLogicException ("Too few appointments");
+        }
+        // Count the number of appointments for the specified client
+//        long clientAppointmentCount = allAppointments.stream()
+//                .filter(appointment -> appointment.getClient().getId().equals(clientId))
+//                .count();
+
+        // Check if the client has more than 3 appointments
+//        Integer clientAppointmentCount = 0;
+//        for (int j = 0; j < controllerSalon.getAllAppointments().size(); j++) {
+//            if (controllerSalon.getAllAppointments().get(j).getClient().getName().equals(name) && controllerSalon.getAllAppointments().get(j).getClient().getPhoneNumber().equals(phone)) {
+//                clientAppointmentCount++;
+//            }
+//        }
+//        if (clientAppointmentCount > 3) {
+            // Retrieve the specific appointment where we want to apply the discount
+            Appointment appointment = appointmentRepository.getById(appointmentId);
+            appointment.getPayment().setAmount(appointment.getPayment().getAmount()*0.5);
+//            System.out.println(appointment.getPayment().getAmount());
+            paymentRepository.update(appointment.getPayment());
+//            appointmentRepository.update(appointment);
+//            appointment.setPayment(appointment.getPayment().);
+//            if (appointment != null) {
+//                // Apply a 50% discount to the appointment's payment
+//                List<Service> services = appointment.getService();
+//                List<Produce> products = appointment.getProducts();
+//
+//                // Calculate the total cost of services and products
+//                double originalAmount = 0.0;
+//                for (Service service : services) {
+//                    originalAmount += service.getPrice();
+//                }
+//                for (Produce product : products) {
+//                    originalAmount += product.getPrice();
+//                }
+//                // Apply 50% discount
+//                double discountedAmount = originalAmount * 0.5;
+//
+//                // Update the payment amount with the discounted value
+//                Payment payment = appointment.getPayment();
+//                if (payment != null) {
+//                    payment.setAmount(discountedAmount);
+//                    paymentRepository.update(payment); // Update payment in the repository
+//                } else {
+//                    // If no payment exists, create a new one with the discounted amount
+//                    Payment newPayment = new Payment(appointmentId, services, products,clientId);
+//                    newPayment.setAmount(discountedAmount);
+//                    appointment.setPayment(newPayment);
+//                    appointmentRepository.update(appointment); // Update the appointment in the repository
+//                }
+//            }
+        }
+        catch (BussinessLogicException e){throw new BussinessLogicException("Too few appointments");}
     }
 
     /**
@@ -432,7 +464,8 @@ public class ServiceSalon {
      */
     public List<Payment> filterPaymentsByClients(Integer clientId) {
         List<Payment> payments = new ArrayList<Payment>(paymentRepository.getAll());
-        payments = payments.stream().filter(clieId -> Objects.equals(clieId.getId(), clientId)).toList();
+        payments = payments.stream().filter(clieId -> Objects.equals(clieId.getClientId(), clientId)).toList();
+        payments.size();
         return payments;
     }
 
@@ -441,44 +474,57 @@ public class ServiceSalon {
      *
      * @param yyyy_mm the month in "yyyy-MM" format to calculate bonuses for
      */
-    public void getBonuses(String yyyy_mm) {
+    public Double getBonuses(String yyyy_mm) {
         List<Appointment> appointments = appointmentRepository.getAll();
-        Double barberBonus = 0.0, nailPainterBonus = 0.0, pedicuristBonus = 0.0;
-
+//        Double barberBonus = 0.0, nailPainterBonus = 0.0, pedicuristBonus = 0.0;
+        Double bonus=0.0;
         // Calculate bonuses for services performed within the specified month
+        try{
         for (Appointment appointment : appointments) {
             DateTimeFormatter formatterFull = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String date1 = appointment.getDateTime().substring(0, 10);
             LocalDate parsedDate1 = LocalDate.parse(date1, formatterFull);
             LocalDate parsedDate2 = LocalDate.parse(yyyy_mm + "-01", formatterFull);
             LocalDate parsedDate3 = LocalDate.parse(yyyy_mm + "-31", formatterFull);
+//            LocalDate date4 = LocalDate.parse(LocalDate.now().toString())
+//            if (parsedDate1.isAfter(LocalDate.now())){
+//                throw new BussinessLogicException("The month don t make sense, cause it s in the future");
+//            }
 
             // Check if the appointment date falls within the specified month
             if (parsedDate1.isAfter(parsedDate2) && parsedDate1.isBefore(parsedDate3)) {
                 for (Service service : appointment.getService()) {
-                    if (service.getType() == 1) {
-                        barberBonus += 0.1 * service.getPrice();
-                    }
-                    if (service.getType() == 2) {
-                        nailPainterBonus += 0.1 * service.getPrice();
-                    }
-                    if (service.getType() == 3) {
-                        pedicuristBonus += 0.1 * service.getPrice();
-                    }
-                    if (service.getType() == 4) {
-                        nailPainterBonus += 0.05 * service.getPrice();
-                        pedicuristBonus += 0.05 * service.getPrice();
-                    }
+                    bonus+=0.1*service.getPrice();
+//                    if (service.getType() == 1) {
+//                        barberBonus += 0.1 * service.getPrice();
+//                    }
+//                    if (service.getType() == 2) {
+//                        nailPainterBonus += 0.1 * service.getPrice();
+//                    }
+//                    if (service.getType() == 3) {
+//                        pedicuristBonus += 0.1 * service.getPrice();
+//                    }
+//                    if (service.getType() == 4) {
+//                        nailPainterBonus += 0.05 * service.getPrice();
+//                        pedicuristBonus += 0.05 * service.getPrice();
+//                    }
                 }
             }
         }
+
 
         List<Barber> barbers = barberRepository.getAll();
         List<Pedicurist> pedicurists = pedicuristRepository.getAll();
         List<NailPainter> nailPainters = nailPainterRepository.getAll();
 
-        System.out.println("The bonus for the month " + yyyy_mm + " is for each:\nbarber: " + barberBonus / barbers.size()
-                + " Leuti\npedicurist: " + pedicuristBonus / pedicurists.size() + " Leuti\nnailPainter: "
-                + nailPainterBonus / nailPainters.size() + " Leuti\n");
+//        System.out.println("The bonus for the month " + yyyy_mm + " is for each:\nbarber: " + barberBonus / barbers.size()
+//                + " Leuti\npedicurist: " + pedicuristBonus / pedicurists.size() + " Leuti\nnailPainter: "
+//                + nailPainterBonus / nailPainters.size() + " Leuti\n");
+            if (bonus==0.0){throw new BussinessLogicException("No work in that Month");
+            }
+        System.out.println("The bonus for the month "+yyyy_mm+" is "+bonus/(barbers.size()+pedicurists.size()+nailPainters.size()));
+            return bonus/(barbers.size()+pedicurists.size()+nailPainters.size());
+        }
+        catch (BussinessLogicException e){throw new BussinessLogicException(e.getMessage());}
     }
 }

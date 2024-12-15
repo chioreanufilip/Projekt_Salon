@@ -1,6 +1,16 @@
 package Module;
-import Module.HasId;
-
+//import com.fasterxml.jackson.annotation.JsonSubTypes;
+//import com.fasterxml.jackson.annotation.JsonTypeInfo;
+//@JsonTypeInfo(
+//        use = JsonTypeInfo.Id.NAME,
+//        include = JsonTypeInfo.As.PROPERTY,
+//        property = "type"
+//)
+//@JsonSubTypes({
+//        @JsonSubTypes.Type(value = Barber.class, name = "Barber"),
+//        @JsonSubTypes.Type(value = NailPainter.class, name = "NailPainter"),
+//        @JsonSubTypes.Type(value = Pedicurist.class, name = "Pedicurist")
+//})
 /**
  * Represents an abstract employee in the system.
  * This class serves as a base for specific employee types, storing shared attributes

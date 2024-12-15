@@ -1,5 +1,4 @@
 package Module;
-import java.util.Vector;
 
 /**
  * Represents a Nail Painter employee specializing in nail care services.
@@ -20,6 +19,14 @@ public class NailPainter extends Employee {
      */
     public NailPainter(String name, int experience, String speciality, String gelNailExperience, Integer id) {
         super(name, experience, speciality, id);
+        this.gelNailExperience = gelNailExperience;
+    }
+
+    public String getGelNailExperience() {
+        return gelNailExperience;
+    }
+
+    public void setGelNailExperience(String gelNailExperience) {
         this.gelNailExperience = gelNailExperience;
     }
 

@@ -1,7 +1,5 @@
 package Module;
 
-import java.util.Vector;
-
 /**
  * Represents a barber in the salon system.
  * Extends the Employee class and includes additional attributes and methods specific to a barber.

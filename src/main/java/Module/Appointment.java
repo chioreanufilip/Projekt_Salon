@@ -1,6 +1,5 @@
 package Module;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class Appointment implements HasId {
      * @param client    the client associated with the appointment
      * @param service   the list of services for the appointment
      */
-    public Appointment(Integer ID, String dateTime, Client client, List<Service> service) {
+    public Appointment(Integer ID, String dateTime, Client client, List<Service> service,Payment payment) {
         this.ID = ID;
         this.dateTime = dateTime;
         this.status = status;
@@ -156,7 +155,7 @@ public class Appointment implements HasId {
      * @return the payment details
      */
     public Payment getPayment() {
-        return payment;
+        return this.payment;
     }
 
     /**
@@ -176,4 +175,8 @@ public class Appointment implements HasId {
     public Integer getId() {
         return ID;
     }
+
+//    public void setPayment(Payment payment) {
+//        this.payment = payment;
+//    }
 }

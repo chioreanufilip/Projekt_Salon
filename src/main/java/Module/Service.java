@@ -1,5 +1,7 @@
 package Module;
 
+import java.util.List;
+
 /**
  * Represents a service offered in the salon. The service has an ID, a name, a duration, a price, and a type which corresponds
  * to different employee types.
@@ -11,7 +13,7 @@ public class Service implements HasId {
     private String duration;
     private double price;
     private Integer type;  // Type 1 for barber, 2 for Nailpainter, 3 for pedicurist, 4 for both NailPainter and Pedi
-
+   private List<Employee> employees;
     /**
      * Constructs a Service object with the specified details.
      *
@@ -19,14 +21,22 @@ public class Service implements HasId {
      * @param name     the name of the service
      * @param duration the duration of the service (e.g., "30 minutes")
      * @param price    the price of the service
-     * @param type     the type of service (1 for barber, 2 for Nailpainter, 3 for pedicurist, 4 for both NailPainter and Pedi)
+//     * @param type     the type of service (1 for barber, 2 for Nailpainter, 3 for pedicurist, 4 for both NailPainter and Pedi)
      */
-    public Service(int ID, String name, String duration, double price, Integer type) {
+//    public Service(int ID, String name, String duration, double price, Integer type) {
+//        this.ID = ID;
+//        this.name = name;
+//        this.duration = duration;
+//        this.price = price;
+//        this.type = type;
+//    }
+    public Service(int ID, String name, String duration, double price, List<Employee> Employees) {
         this.ID = ID;
         this.name = name;
         this.duration = duration;
         this.price = price;
-        this.type = type;
+//        this.type = type;
+        this.employees=Employees;
     }
 
     /**
@@ -111,16 +121,24 @@ public class Service implements HasId {
      *
      * @return the type of the service
      */
-    public Integer getType() {
-        return type;
-    }
+//    public Integer getType() {
+//        return type;
+//    }
 
     /**
      * Sets the type for the service.
      *
-     * @param type the type to set for the service (1 for barber, 2 for Nailpainter, 3 for pedicurist, 4 for both NailPainter and Pedi)
+//     * @param type the type to set for the service (1 for barber, 2 for Nailpainter, 3 for pedicurist, 4 for both NailPainter and Pedi)
      */
-    public void setType(Integer type) {
-        this.type = type;
+//    public void setType(Integer type) {
+//        this.type = type;
+//    }
+
+    public List<Employee> getEmployees() {
+        return this.employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

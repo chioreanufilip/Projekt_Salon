@@ -1,5 +1,4 @@
 package Module;
-import java.util.Vector;
 
 /**
  * Represents a pedicurist, a type of employee who specializes in foot care.
@@ -21,6 +20,13 @@ public class Pedicurist extends Employee {
     public Pedicurist(String name, Integer experience, String speciality, String FootCareSpecialisation, Integer id) {
         super(name, experience, speciality, id);
         this.FootCareSpecialisation = FootCareSpecialisation;
+    }
+    public String getFootCareSpecialisation() {
+        return FootCareSpecialisation;
+    }
+
+    public void setFootCareSpecialisation(String footCareSpecialisation) {
+        FootCareSpecialisation = footCareSpecialisation;
     }
 
     /**
