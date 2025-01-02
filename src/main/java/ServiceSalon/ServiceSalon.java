@@ -232,8 +232,10 @@ public class ServiceSalon {
             int month = Integer.parseInt(parts[1]); // MM
             int day = Integer.parseInt(parts[2]);   // dd
             int hour = Integer.parseInt(parts[3]);
-            if(year<LocalDate.now().getYear()||month<LocalDate.now().getMonthValue()||day<LocalDate.now().getDayOfMonth()&&month<LocalDate.now().getMonthValue()){
-                throw new BussinessLogicException("The time isn t making sens");
+            if(year<LocalDate.now().getYear()||year==LocalDate.now().getYear()&&month<LocalDate.now().getMonthValue()||day<LocalDate.now().getDayOfMonth()&&month<LocalDate.now().getMonthValue()&&year<=LocalDate.now().getYear()||
+            hour<8||hour>20){
+
+                throw new BussinessLogicException("The time is in the past or it is not between the working hours 08-20");
             }
         Appointment appointment = new Appointment(id, time, client, service,payment);
         appointmentRepository.create(appointment);

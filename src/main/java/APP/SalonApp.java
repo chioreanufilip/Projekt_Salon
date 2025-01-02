@@ -1,6 +1,7 @@
 package APP;
 
-
+import Exceptions.EntityNotFoundException;
+import repository.InMemoryRepository;
 import Exceptions.ValidationException;
 import Module.Barber;
 import Module.NailPainter;
@@ -21,45 +22,75 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import repository.InFileRepository;
 //import  org.json.simple.JSONObject;
 
 public class SalonApp {
-//    private final Controller =Controller;
+    //    private final Controller =Controller;
 //    ControllerSalon controller = new ControllerSalon();
+    private Repository<Barber> repoBarb;
+    private Repository<Client> repoClient;
+//    private Repository<Pedicurist> repoPedicurist;
+    private Repository<NailPainter>repoNail;
+    private Repository<Service> repoService;
+    private Repository<Review> repoReview;
+    private Repository<Appointment> repoAppointment;
+    private Repository<Payment> repoPayment;
+//    private Repository<ServiceSalon> repoServiceSalon;
+//    private Repository<Review> repoReview;
+    private Repository<Pedicurist> repoPedi;
+    private Repository<Produce> repoProduct;
+    private ServiceSalon serviceSalon;
+    private ControllerSalon controllerSalon;
+//    ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+//    ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
+
     public SalonApp() {
 //        this.Controller = controller;
-    }///creates all the necesery repositories
-//    Repository<Barber> repoBarb = new InMemoryRepository<Barber>();
-//    Repository<NailPainter> repoNail = new InMemoryRepository<NailPainter>();
-//    Repository<Pedicurist> repoPedi = new InMemoryRepository<Pedicurist>();
-//    Repository<Produce> repoProduct = new InMemoryRepository<Produce>();
-//    Repository<Service> repoService = new InMemoryRepository<Service>();
-//    Repository<Payment> repoPayment = new InMemoryRepository<Payment>();
-//    Repository<Review> repoReview = new InMemoryRepository<Review>();
-//    Repository<Appointment> repoAppointment = new InMemoryRepository<Appointment>();
-//    Repository<Client> repoClient = new InMemoryRepository<Client>();
+    }
 
+    /// creates all the necesery repositories
+    public void inMemoryRepository() {
+
+    repoBarb = new InMemoryRepository<Barber>();
+    repoNail = new InMemoryRepository<NailPainter>();
+    repoPedi = new InMemoryRepository<Pedicurist>();
+    repoProduct = new InMemoryRepository<Produce>();
+    repoService = new InMemoryRepository<Service>();
+    repoPayment = new InMemoryRepository<Payment>();
+    repoReview = new InMemoryRepository<Review>();
+    repoAppointment = new InMemoryRepository<Appointment>();
+    repoClient = new InMemoryRepository<Client>();
+//        ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+//        ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
+}
+public void bdRepository(){
     String DBUrl ="jdbc:sqlserver://Romana_mobile;Database=BarberShop;trustServerCertificate=true;user=barbershop;password=12345;";
-    Repository<Barber> repoBarb =new BarberDBRepo(DBUrl);
-    Repository<Pedicurist> repoPedi = new PedicuristDBRepo(DBUrl);
-    Repository<NailPainter> repoNail = new NailPainterDBRepo(DBUrl);
-    Repository<Produce> repoProduct = new ProductDBRepo(DBUrl);
-    Repository<Client> repoClient = new ClientDBRepo(DBUrl);
-    Repository<Review> repoReview = new ReviewDBRepo(DBUrl);
-    Repository<Service> repoService = new ServiceDBRepo(DBUrl);
-    Repository<Payment> repoPayment = new PaymentDBRepo(DBUrl);
-    Repository<Appointment> repoAppointment = new AppointmentDBRepo(DBUrl);
-//    Repository<Barber> repoBarb = new InFileRepository<Barber>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\barbers.json",Barber.class);
-//    Repository<NailPainter> repoNail = new InFileRepository<NailPainter>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\nailPainters.json",NailPainter.class);
-//    Repository<Pedicurist> repoPedi = new InFileRepository<Pedicurist>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\pedicurist.json",Pedicurist.class);
-//    Repository<Produce> repoProduct = new InFileRepository<Produce>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\products.json",Produce.class);
-//    Repository<Service> repoService = new InFileRepository<Service>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\service.json",Service.class);
-//    Repository<Payment> repoPayment = new InFileRepository<Payment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\Payment.json",Payment.class);
-//    Repository<Review> repoReview = new InFileRepository<Review>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\review.json",Review.class);
-//    Repository<Appointment> repoAppointment = new InFileRepository<Appointment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\appointment.json",Appointment.class);
-//    Repository<Client> repoClient = new InFileRepository<Client>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\jsonFiles\\client.json",Client.class);
-    ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
-    ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
+    repoBarb =new BarberDBRepo(DBUrl);
+    repoPedi = new PedicuristDBRepo(DBUrl);
+    repoNail = new NailPainterDBRepo(DBUrl);
+    repoProduct = new ProductDBRepo(DBUrl);
+    repoClient = new ClientDBRepo(DBUrl);
+    repoReview = new ReviewDBRepo(DBUrl);
+    repoService = new ServiceDBRepo(DBUrl);
+    repoPayment = new PaymentDBRepo(DBUrl);
+    repoAppointment = new AppointmentDBRepo(DBUrl);
+//    ServiceSalon serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+//    ControllerSalon controllerSalon = new ControllerSalon(serviceSalon);
+    }
+public void inFileRepo(){
+    repoBarb = new InFileRepository<Barber>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\barbers.json",Barber.class);
+    repoNail = new InFileRepository<NailPainter>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\nailPainters.json",NailPainter.class);
+    repoPedi = new InFileRepository<Pedicurist>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\pedicurist.json",Pedicurist.class);
+    repoProduct = new InFileRepository<Produce>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\products.json",Produce.class);
+    repoService = new InFileRepository<Service>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\service.json",Service.class);
+    repoPayment = new InFileRepository<Payment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\Payment.json",Payment.class);
+    repoReview = new InFileRepository<Review>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\review.json",Review.class);
+    repoAppointment = new InFileRepository<Appointment>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\appointment.json",Appointment.class);
+    repoClient = new InFileRepository<Client>("C:\\Users\\chior\\IdeaProjects\\Projekt_Salon\\src\\main\\java\\jsonFiles\\client.json",Client.class);
+//    serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+//    controllerSalon = new ControllerSalon(serviceSalon);
+    }
     public void initialize(){
         Barber m =new Barber("Bob","Wolfcut, Fades, Fringe",1,"Wolfcut",Integer.valueOf(1));
         repoBarb.create(m);
@@ -88,7 +119,10 @@ public class SalonApp {
     }
     public void menu() {
         try {
+
             initialize();
+            serviceSalon = new ServiceSalon(repoBarb,repoNail,repoProduct,repoPedi,repoService,repoAppointment,repoPayment,repoReview,repoClient);
+            controllerSalon = new ControllerSalon(serviceSalon);
             ///The main menu from where you can delete employees or add appointments or make reviews
             System.out.println("Welcome to Menu: \n" +
                     "1 - make appointment\n" +
@@ -189,7 +223,7 @@ public class SalonApp {
                         System.out.println("Please enter the time for the appointment like this yyyy-MM-dd-hh: ");
                         time1 = scan.next();
                         if (!isValidDateTime(time1)){
-                            throw new ValidationException("You have given an invalid date");
+                            throw new ValidationException("You have given an invalid date, because it is not in form yyyy-MM-dd-hh");
                         }
                         if (controllerSalon.getAllAppointments().isEmpty()) {
                             time = Boolean.FALSE;
@@ -201,7 +235,9 @@ public class SalonApp {
                                 time = Boolean.FALSE;
                             } else {
                                 System.out.println("Sorry that time is taken\n");
-                                break;
+                                checkFreeTimes(time1);
+                                time=Boolean.TRUE;
+//                                break;
                             }
                         }
                     }
@@ -280,7 +316,8 @@ public class SalonApp {
                             for (int i = 0; i < controllerSalon.getAllClients().size(); i++) {
                                 if (controllerSalon.getAllClients().get(i).getPhoneNumber().equals(phone) && controllerSalon.getAllClients().get(i).getName().equals(name)) {
                                     clientId = i;
-                                    clientId1 = i;
+//                                    clientId = controllerSalon.getAllClients().get(i).getId();
+                                    clientId1 = controllerSalon.getAllClients().get(i).getId();
 //                                Client existingClient = controllerSalon.getAllClients().get(clientId+1);
 
                                     // Count the number of appointments for this client
@@ -308,7 +345,7 @@ public class SalonApp {
 //                                            controllerSalon.applyLoyaltyDiscount(clientId + 1, appointmentId);
                                             System.out.println("50% loyalty discount applied!");
                                         }
-                                    } else {
+                                    } else {discount=false;
                                         System.out.println("You do not qualify for the loyalty discount yet.");
                                     }
                                     break;
@@ -336,11 +373,11 @@ public class SalonApp {
                     } else {
                         controllerSalon.enrollAppointment(controllerSalon.getAllAppointments().getLast().getId() + 1, time1, controllerSalon.getAllClients().get(clientId), chosenService, payment1);
                         if (discount){
-                            controllerSalon.applyLoyaltyDiscount(clientId,controllerSalon.getAllAppointments().getLast().getId());
+                            controllerSalon.applyLoyaltyDiscount(clientId1,controllerSalon.getAllAppointments().getLast().getId());
                         }
                     }
                     System.out.println("You have to pay :\n" +
-                            controllerSalon.getPaymentById(controllerSalon.getAllAppointments().getLast().getPayment().getId()).getAmount()/2);
+                            controllerSalon.getPaymentById(controllerSalon.getAllAppointments().getLast().getPayment().getId()).getAmount());
                     menu();
                     break;
 
@@ -357,11 +394,12 @@ public class SalonApp {
                             "2- delete\n" +
                             "3- view appointments\n" +
                             "4- view Payments made by a specific Client\n" +
-                            "5- view bonuses\n");
+                            "5- view bonuses\n"+
+                            "6- view all clients\n");
 
                     Scanner scan1 = new Scanner(System.in);
                     int selection1 = scan1.nextInt();
-                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5) {
+                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5&&selection1!=6) {
                         throw new ValidationException("You haven t selected a valid option");
                     }
                     switch (selection1) {
@@ -504,6 +542,12 @@ public class SalonApp {
                             controllerSalon.getThemBonuses(year);
                             menu();
                             break;
+                        case 6:
+                            for(Client client:controllerSalon.getAllClients()){
+                                System.out.println("ID: "+client.getId()+" Name: "+client.getName()+" Phone Number: "+client.getPhoneNumber());
+                            }
+                            menu();
+                            break;
                     }
             }
         }
@@ -513,6 +557,7 @@ public class SalonApp {
     }
 
     private void makeReview() {
+        try{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Review Menu: \n" +
@@ -526,18 +571,56 @@ public class SalonApp {
 
         switch (reviewOption) {
             case 1:
-                // Adding a new review
-                System.out.print("Enter your Client ID: ");
-                int clientId = scanner.nextInt();
 
-                Client client = controllerSalon.getClientById(clientId);
-                if (client == null) {
-                    System.out.println("Client not found. Please make sure the Client ID is correct.");
+                // Adding a new review
+//                String scan = scanner.next();
+                System.out.println("Enter your name: \n");
+                String name = scanner.next();
+                System.out.println("Enter your phonenumber: \n");
+                String phone = scanner.next();
+                if (!phoneNumber(phone)){
+                    throw new ValidationException("The phoneNumber is not valid");
+                }
+                int clientId=0;
+                int actualClientId=0;
+                for (int i = 0; i < controllerSalon.getAllClients().size(); i++) {
+//                            System.out.println(controllerSalon.getAllClients().get(i).getPhoneNumber()+"\n"+controllerSalon.getAllClients().get(i).getName());
+                    if (Objects.equals(controllerSalon.getAllClients().get(i).getPhoneNumber(), phone) && Objects.equals(controllerSalon.getAllClients().get(i).getName(), name)) {
+                        clientId = i;
+                        actualClientId = controllerSalon.getAllClients().get(i).getId();
+                    }
+//                    if (i == controllerSalon.getAllClients().size() - 1) {
+//                        if (clientId != i) {
+//                            if (controllerSalon.getAllClients().isEmpty()) {
+//                                controllerSalon.enrollClient(1, name, phone);
+//                                System.out.println("You have not made an Appointment");
+//                                menu();
+//                                        clientId=i+1;
+//                                clientId1 = 1;
+//                            } else {
+//                                controllerSalon.enrollClient(controllerSalon.getAllClients().getLast().getId() + 1, name, phone);
+//                                clientId1 = controllerSalon.getAllClients().size();
+//                            }
+//                            controllerSalon.getAllClients().size();
+//                            clientId = controllerSalon.getAllClients().size() - 1;
+
+//                        }
+//                        clientId1 = controllerSalon.getAllClients().size();
+//                    }
+                }
+//                        clientId1=controllerSalon.getAllClients().size();
+//                break;
+//                System.out.print("Enter your Client ID: ");
+//                int clientId = scanner.nextInt();
+
+                Client client = controllerSalon.getClientById(actualClientId);
+                if (actualClientId == 0) {
+                    System.out.println("Client not found. Please make sure you have given the corect input.");
                     return;
                 }
 
-                System.out.print("Enter Review ID: ");
-                int reviewId = scanner.nextInt();
+//                System.out.print("Enter Review ID: ");
+//                int reviewId = scanner.nextInt();
 
                 System.out.print("Enter Rating (1-5): ");
                 int rating = scanner.nextInt();
@@ -545,10 +628,16 @@ public class SalonApp {
                 scanner.nextLine();  // Consume newline
                 System.out.print("Enter Comment: ");
                 String comment = scanner.nextLine();
-
+                int reviewId;
+                if(controllerSalon.getAllReviews().isEmpty()){
+                    reviewId=1;
+                }
+                else{
+                    reviewId=controllerSalon.getAllReviews().getLast().getId()+1;
+                }
 //                Review review = new Review(reviewId, rating, comment,clientId);
 //                review.setClientId(clientId);
-                controllerSalon.enrollReview(reviewId, comment,Integer.valueOf(rating),clientId);
+                controllerSalon.enrollReview(reviewId, comment,Integer.valueOf(rating),actualClientId);
                 System.out.println("Thank you, " + client.getName() + ", for your review!");
                 break;
 
@@ -582,9 +671,29 @@ public class SalonApp {
         }
         menu();
     }
+        catch (EntityNotFoundException e){
+            System.out.println("The phone number or the name are wrong, please try again");
+//            return;
+            menu();
+        }
+    }
 
     public static void main(String[] args) {
         SalonApp menu = new SalonApp();
+        System.out.println("Choose the Repo:\n-1 InMemory\n-2 InFileRepo\n-3 DataBaseRepo\n");
+        Scanner scan = new Scanner(System.in);
+        int selection5 = scan.nextInt();
+        switch (selection5){
+            case 1:
+                menu.inMemoryRepository();
+                break;
+            case 2:
+                menu.inFileRepo();
+                break;
+            case 3:
+                menu.bdRepository();
+                break;
+        }
         menu.menu();
     }
     private static boolean isValidDateTime(String input) {
@@ -654,5 +763,31 @@ public class SalonApp {
             }
         }
         return valid;
+    }
+    private void checkFreeTimes(String time){
+        String regex = "\\d{4}-\\d{2}-\\d{2}-\\d{2}";
+        String[] parts = time.split("-");
+        int year = Integer.parseInt(parts[0]);  // yyyy
+        int month = Integer.parseInt(parts[1]); // MM
+        int day = Integer.parseInt(parts[2]);   // dd
+        int hour = Integer.parseInt(parts[3]); //hh
+        System.out.println("You can select a time for the day but you need to select one of these free hours:\n");
+        for (int i=8;i<=20;i++){
+            boolean controll=true;
+            String time1;
+            if (i<10){ time1="0"+i;}
+            else{
+            time1 = String.valueOf(i);
+            }
+            for (Appointment apointment : controllerSalon.getAllAppointments()){
+                if (time1.equals(apointment.getDateTime().substring(apointment.getDateTime().length() - 2)) &&time.substring(0,10).equals(apointment.getDateTime().substring(0,10))) {
+                    controll = false;
+                    break;
+                }
+            }
+            if (controll){
+                System.out.println(time1);
+            }
+        }
     }
 }
