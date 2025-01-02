@@ -1,5 +1,6 @@
 package APP;
 
+import Exceptions.EntityNotFoundException;
 import repository.InMemoryRepository;
 import Exceptions.ValidationException;
 import Module.Barber;
@@ -393,11 +394,12 @@ public void inFileRepo(){
                             "2- delete\n" +
                             "3- view appointments\n" +
                             "4- view Payments made by a specific Client\n" +
-                            "5- view bonuses\n");
+                            "5- view bonuses\n"+
+                            "6- view all clients\n");
 
                     Scanner scan1 = new Scanner(System.in);
                     int selection1 = scan1.nextInt();
-                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5) {
+                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5&&selection1!=6) {
                         throw new ValidationException("You haven t selected a valid option");
                     }
                     switch (selection1) {
@@ -540,6 +542,12 @@ public void inFileRepo(){
                             controllerSalon.getThemBonuses(year);
                             menu();
                             break;
+                        case 6:
+                            for(Client client:controllerSalon.getAllClients()){
+                                System.out.println("ID: "+client.getId()+" Name: "+client.getName()+" Phone Number: "+client.getPhoneNumber());
+                            }
+                            menu();
+                            break;
                     }
             }
         }
@@ -549,6 +557,7 @@ public void inFileRepo(){
     }
 
     private void makeReview() {
+        try{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Review Menu: \n" +
@@ -562,6 +571,7 @@ public void inFileRepo(){
 
         switch (reviewOption) {
             case 1:
+
                 // Adding a new review
 //                String scan = scanner.next();
                 System.out.println("Enter your name: \n");
@@ -660,6 +670,12 @@ public void inFileRepo(){
                 }
         }
         menu();
+    }
+        catch (EntityNotFoundException e){
+            System.out.println("The phone number or the name are wrong, please try again");
+//            return;
+            menu();
+        }
     }
 
     public static void main(String[] args) {
