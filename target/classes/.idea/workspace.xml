@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7af23a1b-be28-4f8e-8a4c-6c6c016a84a8" name="Changes" comment="Lab 5 finalized">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APP/SalonApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APP/SalonApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jsonFiles/appointment.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jsonFiles/appointment.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jsonFiles/client.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jsonFiles/client.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jsonFiles/nailPainters.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jsonFiles/nailPainters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jsonFiles/products.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jsonFiles/products.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jsonFiles/review.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jsonFiles/review.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/InFileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/InFileRepository.java" afterDir="false" />
-    </list>
+    <list default="true" id="7af23a1b-be28-4f8e-8a4c-6c6c016a84a8" name="Changes" comment="Lab 5 finalized" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -228,7 +218,7 @@
       <workItem from="1731267384519" duration="59570000" />
       <workItem from="1731939068883" duration="112366000" />
       <workItem from="1734270110906" duration="1728000" />
-      <workItem from="1734271852840" duration="36084000" />
+      <workItem from="1734271852840" duration="53878000" />
     </task>
     <task id="LOCAL-00001" summary="ReadMe added">
       <option name="closed" value="true" />
@@ -366,7 +356,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734290632645</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Lab 5 finalized">
+      <option name="closed" value="true" />
+      <created>1735831393377</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1735831393377</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Lab 5 finalized">
+      <option name="closed" value="true" />
+      <created>1735832193705</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1735832193705</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,32 +411,32 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>264</line>
+          <line>299</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>263</line>
+          <line>298</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>269</line>
+          <line>304</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>260</line>
+          <line>295</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>252</line>
+          <line>287</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>469</line>
+          <line>470</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
           </properties>
@@ -438,27 +444,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>471</line>
+          <line>472</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>470</line>
+          <line>471</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>253</line>
+          <line>288</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>257</line>
+          <line>292</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>266</line>
+          <line>301</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -478,83 +484,78 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>288</line>
+          <line>323</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>340</line>
+          <line>375</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>385</line>
+          <line>386</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>387</line>
+          <line>388</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>388</line>
+          <line>389</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>393</line>
+          <line>394</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>399</line>
+          <line>400</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>379</line>
+          <line>380</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>382</line>
+          <line>383</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>491</line>
+          <line>492</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>490</line>
+          <line>491</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>495</line>
+          <line>496</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java</url>
-          <line>360</line>
+          <line>361</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>339</line>
+          <line>374</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/repository/InFileRepository.java</url>
-          <line>96</line>
+          <line>107</line>
           <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/repository/InFileRepository.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="116" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
