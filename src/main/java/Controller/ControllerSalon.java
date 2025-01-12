@@ -399,7 +399,9 @@ public class ControllerSalon {
         return serviceSalon.filterPaymentsByClients(clientId);
     }
         public void getThemBonuses (String year_month){
-        serviceSalon.getBonuses(year_month);
+            try{
+        serviceSalon.getBonuses(year_month);}
+            catch (BussinessLogicException e){ System.out.println(e.getMessage());}
     }
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -435,5 +437,8 @@ public class ControllerSalon {
         if (stock == null || stock < 0) {
             throw new ValidationException("Stock must be a non-negative number.");
         }
+    }
+    public List<Employee> getAllEmployees() {
+            return serviceSalon.getAllEmployees();
     }
 }
