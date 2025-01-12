@@ -283,7 +283,8 @@ public void inFileRepo(){
 //                            System.out.println(controllerSalon.getAllClients().get(i).getPhoneNumber()+"\n"+controllerSalon.getAllClients().get(i).getName());
                                 if (Objects.equals(controllerSalon.getAllClients().get(i).getPhoneNumber(), phone) && Objects.equals(controllerSalon.getAllClients().get(i).getName(), name)) {
                                     clientId = i;
-                                    clientId1 = i + 1;
+                                    clientId1 = controllerSalon.getAllClients().get(clientId).getId();
+                                    break;
                                 }
                                 if (i == controllerSalon.getAllClients().size() - 1) {
                                     if (clientId != i) {
@@ -395,11 +396,12 @@ public void inFileRepo(){
                             "3- view appointments\n" +
                             "4- view Payments made by a specific Client\n" +
                             "5- view bonuses\n"+
-                            "6- view all clients\n");
+                            "6- view all clients\n" +
+                            "7- view employees\n");
 
                     Scanner scan1 = new Scanner(System.in);
                     int selection1 = scan1.nextInt();
-                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5&&selection1!=6) {
+                    if (selection1!=1&&selection1!=2&&selection1!=3&&selection1!=4&&selection1!=5&&selection1!=6&&selection1!=7) {
                         throw new ValidationException("You haven t selected a valid option");
                     }
                     switch (selection1) {
@@ -418,11 +420,13 @@ public void inFileRepo(){
                                     System.out.println("Enter Name");
                                     String name = scan2.next();
                                     System.out.println("Enter Hairstyles:\n");
-                                    String hairstyles = scan2.next();
+                                    scan2.nextLine();
+                                    String hairstyles = scan2.nextLine();
                                     System.out.println("Enter how many years of experience:\n");
                                     int experience = scan2.nextInt();
                                     System.out.println("Enter what he specializes in:\n");
-                                    String specialize = scan2.next();
+                                    scan2.nextLine();
+                                    String specialize = scan2.nextLine();
                                     System.out.println("Enter id: ");
                                     Integer id = (Integer) scan2.nextInt();
                                     controllerSalon.enrollBarber(name, hairstyles, experience, specialize, id);
@@ -432,11 +436,13 @@ public void inFileRepo(){
                                     System.out.println("Enter Name");
                                     String name1 = scan2.next();
                                     System.out.println("Enter the speciality:\n");
-                                    String speciality = scan2.next();
+                                    scan2.nextLine();
+                                    String speciality = scan2.nextLine();
                                     System.out.println("Enter how many years of experience:\n");
                                     int experience1 = scan2.nextInt();
                                     System.out.println("what kind of experience do you have with gel:\n");
-                                    String gelExperience = scan2.next();
+                                    scan2.nextLine();
+                                    String gelExperience = scan2.nextLine();
                                     System.out.println("Enter id: ");
                                     Integer id2 = (Integer) scan2.nextInt();
                                     controllerSalon.enrollNailPainter(name1, experience1, speciality, gelExperience, id2);
@@ -446,11 +452,13 @@ public void inFileRepo(){
                                     System.out.println("Enter Name");
                                     String name2 = scan2.next();
                                     System.out.println("Enter the speciality:\n");
-                                    String speciality3 = scan2.next();
+                                    scan2.nextLine();
+                                    String speciality3 = scan2.nextLine();
                                     System.out.println("Enter how many years of experience:\n");
                                     Integer experience3 = (Integer) scan2.nextInt();
                                     System.out.println("write what kind of Foot Care Speciality you have:\n");
-                                    String footCare = scan2.next();
+                                    scan2.nextLine();
+                                    String footCare = scan2.nextLine();
                                     System.out.println("Enter id: ");
                                     Integer id1 = (Integer) scan2.nextInt();
                                     controllerSalon.enrollPedicurist(name2, experience3, speciality3, footCare, id1);
@@ -458,7 +466,8 @@ public void inFileRepo(){
                                     break;
                                 case 4:
                                     System.out.println("Enter the name of the product: ");
-                                    String productName = scan.next();
+                                    scan.nextLine();
+                                    String productName = scan.nextLine();
                                     System.out.println("Write the price you are selling it for:\n");
                                     Double price = (Double) scan.nextDouble();
                                     System.out.println("How many do you have: \n");
@@ -545,6 +554,12 @@ public void inFileRepo(){
                         case 6:
                             for(Client client:controllerSalon.getAllClients()){
                                 System.out.println("ID: "+client.getId()+" Name: "+client.getName()+" Phone Number: "+client.getPhoneNumber());
+                            }
+                            menu();
+                            break;
+                        case 7:
+                            for (Employee employee :controllerSalon.getAllEmployees()){
+                                System.out.println("ID: "+employee.getId()+" Name: "+employee.getName()+" Works as: "+employee.getClass().getSimpleName());
                             }
                             menu();
                             break;

@@ -529,4 +529,13 @@ public class ServiceSalon {
         }
         catch (BussinessLogicException e){throw new BussinessLogicException(e.getMessage());}
     }
+    public List<Employee> getAllEmployees(){
+        List<Barber> barbers = barberRepository.getAll();
+        List<NailPainter> nailPainters = nailPainterRepository.getAll();
+        List<Pedicurist> pedicurists = pedicuristRepository.getAll();
+        List<Employee> employees = new ArrayList<Employee>(barbers);
+        employees.addAll(nailPainters);
+        employees.addAll(pedicurists);
+        return employees;
+    }
 }

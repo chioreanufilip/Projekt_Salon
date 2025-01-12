@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7af23a1b-be28-4f8e-8a4c-6c6c016a84a8" name="Changes" comment="Lab 5 finalized">
-      <change beforePath="$PROJECT_DIR$/repository/InFileRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/APP/SalonApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APP/SalonApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ControllerSalon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ControllerSalon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceSalon/ServiceSalon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/APP/SalonApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/APP/SalonApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ControllerSalon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ControllerSalon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServiceSalon/ServiceSalon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceSalon/ServiceSalon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/target/classes/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/Projekt_Salon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/target/classes/Projekt_Salon.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/repository/textfile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/jsonFiles/appointment.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/target/classes/jsonFiles/appointment.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +61,10 @@
     &quot;accountId&quot;: &quot;cbeeb26b-3e00-482d-baea-74d1355cf40e&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -59,43 +76,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.SalonApp.executor": "Run",
-    "Application.SalonAppDB.executor": "Run",
-    "JUnit.AppTest.createTest.executor": "Run",
-    "JUnit.AppTest.deleteTest.executor": "Run",
-    "JUnit.AppTest.executor": "Run",
-    "JUnit.AppTest.testVoucher.executor": "Run",
-    "JUnit.AppTest.updateTest.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "filip",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/chior/IdeaProjects/Projekt_Salon/src/test/java/repository",
-    "last_opened_file_path": "C:/Users/chior/Downloads/junit-jupiter-api-5.3.1.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/chior/IdeaProjects/Projekt_Salon/test/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SalonApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SalonAppDB.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.createTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.deleteTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.testVoucher.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AppTest.updateTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;filip&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/chior/IdeaProjects/Projekt_Salon/src/test/java/repository&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chior/Downloads/junit-jupiter-api-5.3.1.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/chior/IdeaProjects/Projekt_Salon/test/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlserver"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlserver&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chior\IdeaProjects\Projekt_Salon\.idea" />
@@ -221,7 +238,8 @@
       <workItem from="1731267384519" duration="59570000" />
       <workItem from="1731939068883" duration="112366000" />
       <workItem from="1734270110906" duration="1728000" />
-      <workItem from="1734271852840" duration="54180000" />
+      <workItem from="1734271852840" duration="64824000" />
+      <workItem from="1736681782877" duration="495000" />
     </task>
     <task id="LOCAL-00001" summary="ReadMe added">
       <option name="closed" value="true" />
@@ -391,7 +409,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735832625949</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Lab 5 finalized">
+      <option name="closed" value="true" />
+      <created>1735832829270</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1735832829270</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -430,27 +456,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>299</line>
+          <line>300</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>298</line>
+          <line>299</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>304</line>
+          <line>305</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>295</line>
+          <line>296</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>287</line>
+          <line>288</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -473,17 +499,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>288</line>
+          <line>289</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>292</line>
+          <line>293</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>301</line>
+          <line>302</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -503,12 +529,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>323</line>
+          <line>324</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>375</line>
+          <line>376</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -568,13 +594,73 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
-          <line>374</line>
+          <line>375</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/repository/InFileRepository.java</url>
           <line>107</line>
           <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>283</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>285</line>
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>290</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>291</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>358</line>
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>360</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>359</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>365</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>286</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/APP/SalonApp.java</url>
+          <line>306</line>
+          <option name="timeStamp" value="128" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
